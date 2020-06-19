@@ -1,6 +1,12 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import {Provider} from 'react-redux'
+import Reducer from './store/reducer'
+import {createStore} from 'redux'
+import LoginContainer from './components/login/loginContainer'
+import SignupContainer from './components/signup/signupContainer'
+const Store = createStore(Reducer)
 
 class App extends React.Component{
   constructor(){
@@ -17,9 +23,12 @@ class App extends React.Component{
   }
   render(){
     return(
-      <div>
-        <h1>Hello World!!!</h1>
-      </div>
+     <Provider store = {Store}>
+       <LoginContainer/>
+       <SignupContainer/>
+
+
+     </Provider>
     )
   }
 }
