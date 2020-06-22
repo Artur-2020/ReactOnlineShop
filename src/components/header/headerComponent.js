@@ -16,7 +16,7 @@ class Header extends React.Component{
                 <ul>
                   <li><a href="#"> <i  className="lni lni-home"/>Shop</a></li>
                   <li><a href="#"><i  className="fa fa-cart-plus"/>Add Product</a></li>
-                  <li><a href="#"> <i class="lni lni-dropbox"></i>My Products</a></li>
+                  <li><a href="#"> <i className="lni lni-dropbox"></i>My Products</a></li>
                   <li><a href="#"> <i  className="lni lni-star"/>Wishlist</a></li>
                   <li><a href="#"> <i  className="lni lni-cart"/> Cart</a></li>
                   <li><a href="#"> <i  className="fa fa-user"/>Log In</a></li>

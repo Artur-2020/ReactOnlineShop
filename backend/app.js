@@ -24,11 +24,10 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-console.log('ahjh')
-console.log('Art')
 
-app.post('/test',(req,res)=>{
-    res.send('ok')
+
+app.post('/products',(req,res)=>{
+    res.send([{name:'Phone'}])
     
 })
 

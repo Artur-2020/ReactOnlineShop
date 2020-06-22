@@ -9,6 +9,7 @@ class ProductComponent extends React.Component{
     render(){
       return(
       <div>
+        <h1>{this.props.productState.product[0]['name']}</h1>
       
           
       </div>

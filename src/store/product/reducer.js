@@ -1,5 +1,7 @@
 const productState = {
-	product:[]
+	product:[
+		{name:'Notebook'}
+	]
 }
 const productReducer = (state=productState,action) =>{
 	switch(action.type){

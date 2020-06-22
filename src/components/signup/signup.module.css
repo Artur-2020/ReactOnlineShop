@@ -5,6 +5,7 @@
     font-size: 2em;
  }
  .main{
+    /* background-color: red; */
      margin-top: 200px;
  }
  .form_inp{
@@ -36,7 +37,7 @@
    
     height: 25px;
     cursor: pointer;
-    border: 1.5px solid #123F52;
+    border: 1.5px solid gray;
     margin: 0 auto;
     border-radius: 10%;
     margin-top: 20px;

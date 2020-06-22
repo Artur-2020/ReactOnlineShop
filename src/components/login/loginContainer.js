@@ -1,14 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 //es connecti mijocov containeri hamar stori arjeqy dardznelu enq hasaneli
-import LoginComponent from './loginComponent'
+import LoginComponent from './loginComponent';
+import AllActions from '../../store/action'
+
 
 class LoginContainer extends React.Component{
    
     render(){
       return(
         <React.Fragment>
-          <LoginComponent loginState ={this.props.login} />
+          <LoginComponent loginState ={this.props.login} loginActionEmail={this.props.loginActionEmail} loginActionPassword = {this.props.loginActionPassword} />
         </React.Fragment>
       )
     }
@@ -20,6 +22,10 @@ class LoginContainer extends React.Component{
     }
 
   }
+  const mapDispatchToProps={
+   loginActionEmail:AllActions.loginActions.chnageLoginEmail,
+   loginActionPassword:AllActions.loginActions.chnageLoginPassword
+  }
   
-  export default  connect(mapStateToProps)(LoginContainer);
+  export default  connect(mapStateToProps,mapDispatchToProps)(LoginContainer);
   
