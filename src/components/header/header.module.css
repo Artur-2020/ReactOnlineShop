@@ -85,7 +85,7 @@ ul > li > a> i{
     transform-origin: 50% 10%;
   }
   
-  @media screen and (max-width: 900px){
+  @media screen and (max-width: 992px){
     .navbar_toggler{
       display: block;
     }
@@ -105,11 +105,11 @@ ul > li > a> i{
       display: flex;
       justify-content: space-between;
       flex-direction: column;
-      height: 100%;
+      height: 70%;
     }
     li{
       text-align: center;
       display: block;
-      margin: 25px 0; 
+      margin: 35px 0; 
     }
   }

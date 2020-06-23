@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 
 
 app.post('/products',(req,res)=>{
-    res.send([{name:'Phone'}])
+    res.send([{name:'Mobile'}])
     
 })
 

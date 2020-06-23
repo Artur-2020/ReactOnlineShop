@@ -9,6 +9,7 @@ import LoginContainer from './components/login/loginContainer'
 import SignupContainer from './components/signup/signupContainer'
 import ProductContainer from './components/product/productContainer.js'
 import HeaderComponent from './components/header/headerComponent'
+import FooterComponent from './components/footer/footerComponent'
 import thunk from 'redux-thunk'
 //thunkiu mijocov sinxronavorum enq vor actionnery sinxronavorvats ashxaten tvyaly ga nor action ashxati
 const Store = createStore(Reducer,applyMiddleware(thunk))
@@ -26,7 +27,8 @@ class App extends React.Component{
        <HeaderComponent/>
         <LoginContainer/>
         {/* <SignupContainer/> */}
-        <ProductContainer/>
+        {/* <ProductContainer/> */}
+        <FooterComponent/>
 
 
      </Provider>
