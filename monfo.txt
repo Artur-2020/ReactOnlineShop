@@ -1,0 +1,17 @@
+1  download mongo db  heto mtnel localdisc c > program files > mongo db
+
+ > server > 4.2 > data
+
+
+1.2 mongo db compase
+
+2 mongo db install 
+
+2.1 run "C:\Program Files\MongoDB\Server\4.2\bin\mongo.exe" command
+
+"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"
+
+es vor vortex uzenq db-n yndex qci
+sa kara lini kara chlini
+
+use anelu hamar menq mongo.exe commandum grum enq use + database name
