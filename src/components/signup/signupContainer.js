@@ -8,7 +8,7 @@ class SignupContainer extends React.Component{
     render(){
       return(
         <React.Fragment>
-            <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} />
+            <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} signupActionForm = {this.props.signupActionSignupForm} />
          
         </React.Fragment>
       )
@@ -20,16 +20,30 @@ class SignupContainer extends React.Component{
     }
 
   }
-  const mapDispatchToProps = {
-    signupActionName:AllActions.signupActions.changeSignupName,
-    signupActionSurname:AllActions.signupActions.changeSignupSurname,
-    signupActionAge:AllActions.signupActions.changeSignupAge,
-    signupActionEmail:AllActions.signupActions.changeSignupEmail,
-    signupActionPassword:AllActions.signupActions.changeSignupPassword,
+  const mapDispatchToProps =(dispatch)=>{
+    return {
+      signupActionName:(value)=>{dispatch(AllActions.signupActions.changeSignupName(value))},
+      signupActionSurname:(value)=>{dispatch(AllActions.signupActions.changeSignupSurname(value))},
+      signupActionAge:(value)=>{dispatch(AllActions.signupActions.changeSignupAge(value))},
+      signupActionEmail:(value)=>{dispatch(AllActions.signupActions.changeSignupEmail(value))},
+      signupActionPassword:(value)=>{dispatch(AllActions.signupActions.changeSignupPassword(value))},
+      signupActionSignupForm:(value)=>{dispatch(AllActions.signupActions.signupForm(value))}
 
 
 
+    }
   }
+  
+  // {
+  //   signupActionName:AllActions.signupActions.changeSignupName,
+  //   signupActionSurname:AllActions.signupActions.changeSignupSurname,
+  //   signupActionAge:AllActions.signupActions.changeSignupAge,
+  //   signupActionEmail:AllActions.signupActions.changeSignupEmail,
+  //   signupActionPassword:AllActions.signupActions.changeSignupPassword,
+
+
+
+  // }
   
   export default  connect(mapStateToProps,mapDispatchToProps)(SignupContainer);
   

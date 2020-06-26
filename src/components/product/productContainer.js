@@ -21,7 +21,7 @@ class ProductContainer extends React.Component{
   }
   const mapDispatchToProps = (dispatch) => {
     return{
-      productActions:dispatch(AllActions.productActions.changeProduct())
+      productActions:()=>{dispatch(AllActions.productActions.changeProduct())}
 
     }
   }

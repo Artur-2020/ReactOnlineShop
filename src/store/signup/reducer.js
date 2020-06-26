@@ -16,7 +16,9 @@ const signupState = {
         case 'signupEmail':
             return {...state,email:action.value}
         case 'signupPassword':
-            return {...state,password:action.value}        
+            return {...state,password:action.value}
+        case 'all':
+            return {...state,name:'',surname:'',age:'',email:'',password:''}            
         default:return state    
     }
 }
