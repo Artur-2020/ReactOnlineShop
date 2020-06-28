@@ -105,11 +105,11 @@ ul > li > a> i{
       display: flex;
       justify-content: space-between;
       flex-direction: column;
-      height: 70%;
+      height: 65%;
     }
     li{
       text-align: center;
       display: block;
-      margin: 35px 0; 
+      margin: 20px 0; 
     }
   }

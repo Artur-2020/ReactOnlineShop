@@ -33,17 +33,6 @@ class SignupContainer extends React.Component{
 
     }
   }
-  
-  // {
-  //   signupActionName:AllActions.signupActions.changeSignupName,
-  //   signupActionSurname:AllActions.signupActions.changeSignupSurname,
-  //   signupActionAge:AllActions.signupActions.changeSignupAge,
-  //   signupActionEmail:AllActions.signupActions.changeSignupEmail,
-  //   signupActionPassword:AllActions.signupActions.changeSignupPassword,
 
-
-
-  // }
-  
   export default  connect(mapStateToProps,mapDispatchToProps)(SignupContainer);
   

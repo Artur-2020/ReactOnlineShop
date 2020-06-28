@@ -13,17 +13,19 @@ var db = mongoose.connection;
 
 const UserModel = require('./schema/userSchema')
 
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+
+
 const data = new UserModel({
-    name:"Artur",
-    surname:"Sahakyan",
+    name:"Sahak",
+    surname:"Varosyan",
     age:17,
     email:"A@gmail.com",
-    password:"123"
+    password:"12344"
 })
 data.save((error)=> {if(error)  console.log(error)})
 
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -47,6 +49,7 @@ app.use(function (req, res, next) {
 });
 
 app.post('/signupForm',(req,res)=>{
+    res.send('ok')
     
 })
 app.post('/products',(req,res)=>{
