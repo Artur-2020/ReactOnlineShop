@@ -3,6 +3,7 @@ import React from 'react'
 class ProductComponent extends React.Component{
   constructor(props){
     super(props)
+    this.props.productActions()
     console.log(this.props)
   }
     
@@ -10,6 +11,7 @@ class ProductComponent extends React.Component{
       return(
       <div>
         <h1>{this.props.productState.product[0]['name']}</h1>
+        
       
           
       </div>

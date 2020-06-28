@@ -9,7 +9,6 @@ class SignupContainer extends React.Component{
       return(
         <React.Fragment>
             <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} signupActionForm = {this.props.signupActionSignupForm} />
-         
         </React.Fragment>
       )
     }
@@ -22,14 +21,13 @@ class SignupContainer extends React.Component{
   }
   const mapDispatchToProps =(dispatch)=>{
     return {
+      
       signupActionName:(value)=>{dispatch(AllActions.signupActions.changeSignupName(value))},
       signupActionSurname:(value)=>{dispatch(AllActions.signupActions.changeSignupSurname(value))},
       signupActionAge:(value)=>{dispatch(AllActions.signupActions.changeSignupAge(value))},
       signupActionEmail:(value)=>{dispatch(AllActions.signupActions.changeSignupEmail(value))},
       signupActionPassword:(value)=>{dispatch(AllActions.signupActions.changeSignupPassword(value))},
       signupActionSignupForm:(value)=>{dispatch(AllActions.signupActions.signupForm(value))}
-
-
 
     }
   }

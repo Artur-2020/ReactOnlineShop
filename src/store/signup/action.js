@@ -1,7 +1,5 @@
-import Axios from "axios"
 
 import axios from 'axios'
-import { compose } from "redux"
 
 
 export const changeSignupName = (a)=>{
