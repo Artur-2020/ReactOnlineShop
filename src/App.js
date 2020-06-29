@@ -24,10 +24,10 @@ class App extends React.Component{
   render(){
     return(
      <Provider store = {Store}>
-       {/* <HeaderComponent/>  */}
+       <HeaderComponent/> 
         {/* <LoginContainer/> */}
-        {/* <SignupContainer/> */}
-        <ProductContainer/>
+        <SignupContainer/>
+        {/* <ProductContainer/> */}
         <FooterComponent/>
 
 

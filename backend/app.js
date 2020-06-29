@@ -16,15 +16,6 @@ const UserModel = require('./schema/userSchema')
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 
 
-const data = new UserModel({
-    name:"Sahak",
-    surname:"Varosyan",
-    age:17,
-    email:"A@gmail.com",
-    password:"12344"
-})
-data.save((error)=> {if(error)  console.log(error)})
-
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -49,7 +40,24 @@ app.use(function (req, res, next) {
 });
 
 app.post('/signupForm',(req,res)=>{
-    res.send('ok')
+    const data = new UserModel({
+        name:req.body.name,
+        surname:req.body.surname,
+        age:req.body.age,
+        email:req.body.email,
+        password:req.body.password
+    })
+    const errors = data.validateSync()
+    console.log(errors)
+    if(errors!=undefined){
+        res.send(errors)
+        console.log('sxal ka')
+    }
+    else{
+        res.send('ok')
+        data.save()
+    }
+    
     
 })
 app.post('/products',(req,res)=>{

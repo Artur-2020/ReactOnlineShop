@@ -8,7 +8,7 @@ class SignupContainer extends React.Component{
     render(){
       return(
         <React.Fragment>
-            <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} signupActionForm = {this.props.signupActionSignupForm} />
+            <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} signupActionConfirmPassword={this.props.signupActionConfirmPassword} signupActionForm = {this.props.signupActionSignupForm} />
         </React.Fragment>
       )
     }
@@ -27,6 +27,7 @@ class SignupContainer extends React.Component{
       signupActionAge:(value)=>{dispatch(AllActions.signupActions.changeSignupAge(value))},
       signupActionEmail:(value)=>{dispatch(AllActions.signupActions.changeSignupEmail(value))},
       signupActionPassword:(value)=>{dispatch(AllActions.signupActions.changeSignupPassword(value))},
+      signupActionConfirmPassword:(value)=>{dispatch(AllActions.signupActions.changeSignupConfirmPassword(value))},
       signupActionSignupForm:(value)=>{dispatch(AllActions.signupActions.signupForm(value))}
 
     }

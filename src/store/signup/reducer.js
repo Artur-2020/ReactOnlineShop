@@ -4,6 +4,7 @@ const signupState = {
     age:'',
     email:'',
     password:'',
+    confirmPassword:''
 }
  const signupReducer = (state=signupState,action) => {
     switch (action.type){
@@ -17,8 +18,11 @@ const signupState = {
             return {...state,email:action.value}
         case 'signupPassword':
             return {...state,password:action.value}
+        case 'signupConfirmPassword':
+           return {...state,confirmPassword:action.value}
+                
         case 'all':
-            return {...state,name:'',surname:'',age:'',email:'',password:''}            
+            return {...state,name:'',surname:'',age:'',email:'',password:'',confirmPassword:''}            
         default:return state    
     }
 }

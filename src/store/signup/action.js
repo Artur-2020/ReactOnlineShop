@@ -17,10 +17,14 @@ export const changeSignupEmail = (a)=>{
 export const changeSignupPassword = (a)=>{
     return {type:'signupPassword',value:a}
 }
+export const changeSignupConfirmPassword = (a)=>{
+    return {type:'signupConfirmPassword',value:a}
+}
 export const signupForm = (data) => {
     return dispatch=>{
-        axios.post('http://localhost/signupForm',data).
+        axios.post('http://localhost:8000/signupForm',data).
         then((result)=>{
+            console.log('amen inch normal a')
             dispatch({
                 type:'all'
             })
