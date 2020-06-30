@@ -4,7 +4,8 @@ const signupState = {
     age:'',
     email:'',
     password:'',
-    confirmPassword:''
+    confirmPassword:'',
+    errors:{name:'',surname:'',age:'',email:'',password:'',confirmPassword:'',}
 }
  const signupReducer = (state=signupState,action) => {
     switch (action.type){
@@ -20,9 +21,12 @@ const signupState = {
             return {...state,password:action.value}
         case 'signupConfirmPassword':
            return {...state,confirmPassword:action.value}
-                
+        case 'signupErrors':
+
+            return {...state,errors:action.value}
+                             
         case 'all':
-            return {...state,name:'',surname:'',age:'',email:'',password:'',confirmPassword:''}            
+            return {...state,name:'',surname:'',age:'',email:'',password:'',confirmPassword:'',errors:{name:'',surname:'',age:'',email:'',password:'',confirmPassword:'',}}            
         default:return state    
     }
 }

@@ -41,11 +41,18 @@ class SignupComponent extends React.Component{
        </div>
         <div id={styles.form}>
             <form onSubmit={this.signupForm}>
+              <p className={styles.error}>{this.props.signupState.errors.name}</p>
               <input type="text" onChange={this.changeValue} name='name' value ={this.props.signupState.name}  className={styles.form_inp} placeholder="Name"/>
+              <p className={styles.error}>{this.props.signupState.errors.surname}</p>
               <input type="text" onChange={this.changeValue} name='surname' value ={this.props.signupState.surname} className={styles.form_inp}  placeholder="Surname"/>
+              <p className={styles.error}>{this.props.signupState.errors.age}</p>              
               <input type="text" onChange={this.changeValue} name='age' value ={this.props.signupState.age} className={styles.form_inp} placeholder="Age"/>
+              <p className={styles.error}>{this.props.signupState.errors.email}</p>
               <input type="text" onChange={this.changeValue} name='email' value ={this.props.signupState.email} className={ styles.form_inp} placeholder="Email"/>
+              <p className={styles.error}>{this.props.signupState.errors.password}</p> 
               <input type="password" onChange={this.changeValue} name='password' value ={this.props.signupState.password}className={styles.form_inp}  placeholder="Password"/>
+              <p className={styles.error}>{this.props.signupState.errors.confirmPassword}</p>
+             
               <input type="password" onChange={this.changeValue} name='confirmPassword' value ={this.props.signupState.confirmPassword} className={ styles.form_inp}  placeholder="Comfirm Password "/>
               <button id={styles.submit}>Sign Up</button>
             </form>
@@ -54,9 +61,6 @@ class SignupComponent extends React.Component{
           <p>If you have a account click here! <span><a className={styles.logLink} href="#">Login</a></span></p>
       </div>
     </div>
-      
-          
-      
       )
     }
   }

@@ -1,3 +1,6 @@
+
+const {check, validationResult } = require('express-validator');
+
 const express = require('express') 
 const app=express()
 const bodyParser = require('body-parser') 
@@ -40,7 +43,15 @@ app.use(function (req, res, next) {
 });
 
 app.post('/signupForm',(req,res)=>{
-    const data = new UserModel({
+    let confirmErr = ''
+    if(req.body.confirmPassword==''){
+        confirmErr='confirm Password is Required' 
+    }
+   if( req.body.confirmPassword!='' && req.body.confirmPassword != req.body.password){
+    confirmErr='Passwordes don`t match '
+   }
+  
+   const data = new UserModel({
         name:req.body.name,
         surname:req.body.surname,
         age:req.body.age,
@@ -48,17 +59,37 @@ app.post('/signupForm',(req,res)=>{
         password:req.body.password
     })
     const errors = data.validateSync()
-    console.log(errors)
-    if(errors!=undefined){
-        res.send(errors)
-        console.log('sxal ka')
+    
+    if(errors!=undefined || confirmErr!=''){
+        res.send([errors,confirmErr])
     }
     else{
         res.send('ok')
         data.save()
+            
     }
     
     
+})
+app.post('/loginForm',[
+        check('email').notEmpty().withMessage('  fill in the email field blank').isEmail().withMessage('The form is incorrect '),
+        check('password').notEmpty().withMessage(' fill in the password field blank'),     
+   ],(req,res)=>{
+    const errors = validationResult(req)
+    let error = {}
+        if (!errors.isEmpty()){
+        
+           errors.errors.forEach((i)=>{
+            if(error[i.param]==undefined){
+                error[i.param] = i.msg
+              }
+           })
+           
+          res.send(error)
+        }
+        else{
+            res.send('ok')
+        }
 })
 app.post('/products',(req,res)=>{
     res.send([{name:'Mobile'}])

@@ -10,7 +10,7 @@ class LoginContainer extends React.Component{
     render(){
       return(
         <React.Fragment>
-          <LoginComponent loginState ={this.props.login} loginActionEmail={this.props.loginActionEmail} loginActionPassword = {this.props.loginActionPassword} />
+          <LoginComponent loginState ={this.props.login} loginActionEmail={this.props.loginActionEmail} loginActionPassword = {this.props.loginActionPassword} loginActionForm = {this.props.loginActionLoginForm}  />
         </React.Fragment>
       )
     }
@@ -22,10 +22,16 @@ class LoginContainer extends React.Component{
     }
 
   }
-  const mapDispatchToProps={
-   loginActionEmail:AllActions.loginActions.chnageLoginEmail,
-   loginActionPassword:AllActions.loginActions.chnageLoginPassword
+  const mapDispatchToProps =(dispatch)=>{
+    return {
+      
+      loginActionEmail:(value)=>{dispatch(AllActions.loginActions.chnageLoginEmail(value))},
+      loginActionPassword:(value)=>{dispatch(AllActions.loginActions.changeLoginPassword(value))},
+      loginActionLoginForm:(value)=>{dispatch(AllActions.loginActions.loginForm(value))}
+
+    }
   }
+ 
   
   export default  connect(mapStateToProps,mapDispatchToProps)(LoginContainer);
   

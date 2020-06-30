@@ -25,8 +25,8 @@ class App extends React.Component{
     return(
      <Provider store = {Store}>
        <HeaderComponent/> 
-        {/* <LoginContainer/> */}
-        <SignupContainer/>
+        <LoginContainer/>
+        {/* <SignupContainer/> */}
         {/* <ProductContainer/> */}
         <FooterComponent/>
 
