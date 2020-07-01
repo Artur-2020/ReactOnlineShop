@@ -36,8 +36,7 @@ export const signupForm = (data) => {
             }
             else{
                 console.log(result.data[1])
-                if(result.data[1]!=''){
-                }
+                
                 if(result.data[0] || result.data[1]!=''){
                     errors.confirmPassword=result.data[1]
                    if(result.data[0]){

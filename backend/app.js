@@ -14,12 +14,10 @@ mongoose.Promise = global.Promise;
 
 var db = mongoose.connection;   
 
-const UserModel = require('./schema/userSchema')
-
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 
 
-
+const UserModel = require('./schema/userSchema')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -42,7 +40,26 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.post('/signupForm',(req,res)=>{
+app.post('/signupForm',[    
+    check('email').custom(  value   => {
+        let data1
+         UserModel.findOne({email:value},(error,data)=>{
+             console.log(data)
+          
+          data1 =data
+        })
+        console.log(data1)
+
+        if(data1 === null){
+            return false
+        }
+        else{
+            return true
+        }
+        
+     }).withMessage('Emaily allredy exist')
+   
+],(req,res)=>{
     let confirmErr = ''
     if(req.body.confirmPassword==''){
         confirmErr='confirm Password is Required' 
@@ -50,6 +67,19 @@ app.post('/signupForm',(req,res)=>{
    if( req.body.confirmPassword!='' && req.body.confirmPassword != req.body.password){
     confirmErr='Passwordes don`t match '
    }
+   let Exerrors = validationResult(req)
+   console.log(Exerrors)
+   let error = {}
+       if (!Exerrors.isEmpty()){
+        //   Exerrors.errors.forEach((i)=>{
+        //    if(error[i.param]==undefined){
+        //        error[i.param] = i.msg
+        //      }
+        //   })
+          
+        //  res.send(error)
+       }
+       
   
    const data = new UserModel({
         name:req.body.name,

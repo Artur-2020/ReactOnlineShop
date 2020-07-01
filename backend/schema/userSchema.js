@@ -1,16 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 const validate = require('mongoose-validator');
-var mongoDB = 'mongodb://127.0.0.1/onlineShop';
 
-mongoose.connect(mongoDB);
-
-mongoose.Promise = global.Promise;
-
-var db = mongoose.connection;   
-console.log(db)
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
-
+  
 
 var  alphaValidator =  [
     validate({
@@ -35,16 +26,7 @@ var  alphaValidator =  [
             isAsync:false,
             message:'Email form is incorrect'
         }),
-        // validate({
-        //     validator: (val)=> {
-        //         return new Promise ( async (resolve, reject) => {
-        //           let item =  await db.users.find({email:val})
-        //           console.log(item)
-        //           resolve(item.length>0)
-        //         })
-        //       },
-        //     message:'Email alredy exist'  
-        // })
+
 
 ] 
      const Schema = mongoose.Schema
@@ -54,7 +36,11 @@ var  alphaValidator =  [
         surname:{type:String,required:true,validate:alphaValidator},
         age:{type:Number,min:16,max:110,required:true},
         email:{type:String,required:true,index:{unique:true},validate:emailValidator},
-        password:{type:String,required:true,validate:passValidator}
+        password:{type:String,required:true,validate:passValidator},
+        password:{type:String,required:true,validate:passValidator},
+        product:[
+            {type:Schema.Types.ObjectId,ref:'product'}
+        ]
     })
 
  module.exports = mongoose.model('user',userModelSchema) 
