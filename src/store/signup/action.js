@@ -35,10 +35,10 @@ export const signupForm = (data) => {
                 })
             }
             else{
-                console.log(result.data[1])
                 
-                if(result.data[0] || result.data[1]!=''){
                     errors.confirmPassword=result.data[1]
+                    console.log(result.data[0])
+                    
                    if(result.data[0]){
                     for(let i in result.data[0]['errors']){
                      
@@ -46,14 +46,18 @@ export const signupForm = (data) => {
                             result.data[0]['message']=result.data[0]['message'].substring(29,65)
                             errors[i] = result.data[0]['message']
                         }
+                        
                         else if(result.data[0]['errors'][i].properties.message){
                             errors[i] =  result.data[0]['errors'][i].properties.message
-                        }
-                        
+                        }                      
                     }
                    }
-                     
-                }
+                   if(errors.email==''){
+                    errors.email=result.data[2].email
+
+               }
+                  
+                
               
                 const ChangeError = (err) =>{
                     dispatch(signupErrors(err))

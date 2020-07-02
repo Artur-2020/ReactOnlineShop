@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './header.module.css'
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+
 
 var classNames = require('classnames');
 
@@ -41,8 +43,10 @@ class Header extends React.Component{
                   <li><a href="#"> <i className="lni lni-dropbox"></i>My Products</a></li>
                   <li><a href="#"> <i  className="lni lni-star"/>Wishlist</a></li>
                   <li><a href="#"> <i  className="lni lni-cart"/> Cart</a></li>
-                  <li><a href="#"> <i  className="fa fa-user"/>Log In</a></li>
-                  <li><a href="#"> <i  className='fa fa-user icons'></i>Sign Up</a></li>
+                  <li><Link to = '/'> <i  className='fa fa-user icons'></i>Sign Up</Link></li>
+                 <li> <Link  to='/login'><i  className="fa fa-user"/>Log In</Link></li>
+                 <li> <Link  to='/profile'><i  className="fa fa-user"/>My Profile</Link></li>
+
                 </ul>
               </nav>
               <button className={btnClass} onClick={this.response} className={styles.navbar_toggler}> 

@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from '../signup/signup.module.css'
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+
 
 class LoginComponent extends React.Component{
   constructor(props){
@@ -35,7 +37,7 @@ class LoginComponent extends React.Component{
            </form>
        </div>
      <div className={styles.link}>
-         <p>If you don`t have a account click here! <span><a className={styles.logLink} href="#">Registration</a></span></p>
+         <p>If you don`t have a account click here! <span><Link className={styles.logLink} to='/'>Registration</Link></span></p>
      </div>
    </div>
      

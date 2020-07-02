@@ -8,28 +8,27 @@ import {createStore,applyMiddleware} from 'redux'
 import LoginContainer from './components/login/loginContainer'
 import SignupContainer from './components/signup/signupContainer'
 import ProductContainer from './components/product/productContainer.js'
-import HeaderComponent from './components/header/headerComponent'
-import FooterComponent from './components/footer/footerComponent'
+import ProfileContainer from './components/profile/profileContainer'
 import thunk from 'redux-thunk'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 //thunkiu mijocov sinxronavorum enq vor actionnery sinxronavorvats ashxaten tvyaly ga nor action ashxati
 const Store = createStore(Reducer,applyMiddleware(thunk))
 
 class App extends React.Component{
-  constructor(){
-
-    super()
+  constructor(props){
+    super(props)
+    console.log(this.props.history)
 
    
   }
   render(){
     return(
      <Provider store = {Store}>
-       <HeaderComponent/> 
-        {/* <LoginContainer/> */}
-        <SignupContainer/>
-        {/* <ProductContainer/> */}
-        <FooterComponent/>
-
+       <Router>
+         <Route path='/login' component={LoginContainer}/>
+         <Route path='/profile' exact component={ProfileContainer}/>
+         <Route path='/' exact component={SignupContainer}/>
+       </Router>
 
      </Provider>
     )

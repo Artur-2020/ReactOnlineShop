@@ -10,6 +10,9 @@ export  const changeLoginPassword = (a) => {
 export const loginErrors = (a) =>{
     return {type:'loginErrors',value:a}
 }
+export const findUser  = (a) => {
+    return {type:'user',value:a}
+}
 
 
 export const loginForm = (data) => {
@@ -18,20 +21,23 @@ export const loginForm = (data) => {
     return dispatch=>{
         axios.post('http://localhost:8000/loginForm',data).
         then((result)=>{
-            if(result.data=='ok'){
+            if(result.data[0]=='ok'){
                 dispatch({
                     type:'loginAll'
                 })
+                const userFind = (user) =>{
+                    dispatch(findUser(user))
+                }
+                userFind(result.data[1])
             }
             else{
-                for(let i in result.data){
+                for(let i in result.data[0]){
                     if(errors[i]=='')
-                    errors[i] = result.data[i]
+                    errors[i] = result.data[0][i]
                 }
                 const ChangeError = (err) =>{
                     dispatch(loginErrors(err))
                 }
-                console.log(errors)
                 ChangeError(errors)
 
 

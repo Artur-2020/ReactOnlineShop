@@ -1,10 +1,15 @@
 
-const {check, validationResult } = require('express-validator');
-
 const express = require('express') 
 const app=express()
 const bodyParser = require('body-parser') 
 const mongoose = require ('mongoose')
+const session = require('express-session')
+
+const {check, validationResult } = require('express-validator');
+
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 var mongoDB = 'mongodb://127.0.0.1/onlineShop';
 
@@ -18,6 +23,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 const UserModel = require('./schema/userSchema')
+
+
+app.use(session({
+  secret: '123',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -42,46 +54,35 @@ app.use(function (req, res, next) {
 
 app.post('/signupForm',[    
     check('email').custom(  value   => {
-        let data1
-         UserModel.findOne({email:value},(error,data)=>{
-             console.log(data)
-          
-          data1 =data
-        })
-        console.log(data1)
+       
+       return   UserModel.findOne({email:value}).then(user => {
+           if(user){
+               return Promise.reject()
+           }
+           
+             
+       })
 
-        if(data1 === null){
-            return false
-        }
-        else{
-            return true
-        }
+        
         
      }).withMessage('Emaily allredy exist')
    
 ],(req,res)=>{
     let confirmErr = ''
     if(req.body.confirmPassword==''){
-        confirmErr='confirm Password is Required' 
+        confirmErr='Path `confirmPassword` is required.' 
     }
    if( req.body.confirmPassword!='' && req.body.confirmPassword != req.body.password){
     confirmErr='Passwordes don`t match '
    }
    let Exerrors = validationResult(req)
-   console.log(Exerrors)
-   let error = {}
+   let emerror = {email:''}
        if (!Exerrors.isEmpty()){
-        //   Exerrors.errors.forEach((i)=>{
-        //    if(error[i.param]==undefined){
-        //        error[i.param] = i.msg
-        //      }
-        //   })
-          
-        //  res.send(error)
+               emerror.email = Exerrors.errors[0].msg   
        }
        
   
-   const data = new UserModel({
+   let data = new UserModel({
         name:req.body.name,
         surname:req.body.surname,
         age:req.body.age,
@@ -89,24 +90,46 @@ app.post('/signupForm',[
         password:req.body.password
     })
     const errors = data.validateSync()
-    
-    if(errors!=undefined || confirmErr!=''){
-        res.send([errors,confirmErr])
+       
+    if(errors!=undefined || confirmErr!='' || emerror.email!=''){
+        
+        res.send([errors,confirmErr,emerror])
     }
     else{
+        bcrypt.hash(req.body.password, saltRounds,  async function(err, hash) {
+        data.password = hash
         res.send('ok')
-        data.save()
-            
+        data.save()  
+             
+        });
+              
     }
-    
-    
 })
 app.post('/loginForm',[
-        check('email').notEmpty().withMessage('  fill in the email field blank').isEmail().withMessage('The form is incorrect '),
-        check('password').notEmpty().withMessage(' fill in the password field blank'),     
-   ],(req,res)=>{
+        check('email').notEmpty().withMessage('  Fill in the email field blank').isEmail().withMessage('The form is incorrect '),
+        check('password').notEmpty().withMessage(' Fill in the password field blank'),     
+        check('email').custom(  (value,{req})   => {
+       
+            return   UserModel.findOne({email:value}).then(user => {
+                if(!user){
+                    return Promise.reject()
+                }
+                else{
+                    let flag = (bcrypt.compareSync(req.body.password, user.password ))
+                    if(!flag){
+                      return Promise.reject()
+                    }
+                    else{
+                        req.session.userId = user._id
+                    }        
+                }
+            })
+        }).withMessage('Something is incorrect')
+   ],
+    async (req,res)=>{
     const errors = validationResult(req)
     let error = {}
+    let user = {}
         if (!errors.isEmpty()){
         
            errors.errors.forEach((i)=>{
@@ -115,17 +138,25 @@ app.post('/loginForm',[
               }
            })
            
-          res.send(error)
+          res.send([error])
         }
         else{
-            res.send('ok')
+            console.log(req.session.userId)
+            await UserModel.findOne({_id:req.session.userId}).then(result => {
+                user.name = result.name
+                user.surname = result.surname
+                user.age = result.age
+
+                
+                  
+            })
+        res.send(['ok',user])
+
         }
+
 })
 app.post('/products',(req,res)=>{
-    res.send([{name:'Mobile'}])
-    
+    res.send([{name:'Mobile'}])  
 })
-
-
 //ete nodey ashxatum a menak vorpes server ete frameworkic inchvor tvyal petq e ga menq use petq e anenq
 app.listen(8000)

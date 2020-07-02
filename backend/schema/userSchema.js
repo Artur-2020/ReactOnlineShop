@@ -17,7 +17,7 @@ var  alphaValidator =  [
 ]
     var passValidator =  validate({
         validator: 'isLength',
-        arguments: [6, 50],
+        arguments: [6, 150],
         message: 'Password should be between {ARGS[0]} and {ARGS[1]} characters',
       })
     let emailValidator = [

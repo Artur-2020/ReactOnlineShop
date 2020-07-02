@@ -1,7 +1,9 @@
 const loginState={
     email:'',
     password:'',
-    errors:{login:'',password:""}
+    errors:{email:'',password:""},
+    user:{name:'',surname:'',age:''}
+
 }
 const loginReducer = (state=loginState,action) => {
     switch(action.type){
@@ -12,7 +14,11 @@ const loginReducer = (state=loginState,action) => {
         case 'loginErrors':
             return {...state,errors:action.value}
         case 'loginAll':
-            return {...state,email:'',password:''}       
+            return {...state,email:'',password:'',errors:{email:'',password:''}}    
+        case 'user':
+            let a =  {...state,user:action.value}
+            console.log(a)
+            return a       
         default: return state    
     }    
 
