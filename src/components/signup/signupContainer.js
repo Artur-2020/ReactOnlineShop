@@ -13,7 +13,7 @@ class SignupContainer extends React.Component{
       return(
         <React.Fragment>
             <Header/>
-            <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} signupActionConfirmPassword={this.props.signupActionConfirmPassword} signupActionForm = {this.props.signupActionSignupForm} />
+            <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} signupActionConfirmPassword={this.props.signupActionConfirmPassword} signupActionForm = {this.props.signupActionSignupForm}  />
             <Footer/>
 
         </React.Fragment>

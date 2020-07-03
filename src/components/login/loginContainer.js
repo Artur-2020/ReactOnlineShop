@@ -13,7 +13,7 @@ class LoginContainer extends React.Component{
       return(
         <React.Fragment>
           <Header/>
-          <LoginComponent loginState ={this.props.login} loginActionEmail={this.props.loginActionEmail} loginActionPassword = {this.props.loginActionPassword} loginActionForm = {this.props.loginActionLoginForm}  />
+          <LoginComponent loginState ={this.props.login} loginActionEmail={this.props.loginActionEmail} loginActionPassword = {this.props.loginActionPassword} loginActionForm = {this.props.loginActionLoginForm} history = {this.props.history}  />
           <Footer/>
         </React.Fragment>
       )
@@ -31,7 +31,7 @@ class LoginContainer extends React.Component{
       
       loginActionEmail:(value)=>{dispatch(AllActions.loginActions.chnageLoginEmail(value))},
       loginActionPassword:(value)=>{dispatch(AllActions.loginActions.changeLoginPassword(value))},
-      loginActionLoginForm:(value)=>{dispatch(AllActions.loginActions.loginForm(value))}
+      loginActionLoginForm:(value,history)=>{dispatch(AllActions.loginActions.loginForm(value,history))}
 
     }
   }

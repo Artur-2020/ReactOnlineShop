@@ -10,12 +10,10 @@ export  const changeLoginPassword = (a) => {
 export const loginErrors = (a) =>{
     return {type:'loginErrors',value:a}
 }
-export const findUser  = (a) => {
-    return {type:'user',value:a}
-}
 
 
-export const loginForm = (data) => {
+
+export const loginForm = (data,history) => {
     let errors={email:'',password:''}
 
     return dispatch=>{
@@ -25,10 +23,7 @@ export const loginForm = (data) => {
                 dispatch({
                     type:'loginAll'
                 })
-                const userFind = (user) =>{
-                    dispatch(findUser(user))
-                }
-                userFind(result.data[1])
+                history.push({pathname:'/profile'})
             }
             else{
                 for(let i in result.data[0]){

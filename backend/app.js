@@ -58,13 +58,8 @@ app.post('/signupForm',[
        return   UserModel.findOne({email:value}).then(user => {
            if(user){
                return Promise.reject()
-           }
-           
-             
-       })
-
-        
-        
+           }    
+       })       
      }).withMessage('Emaily allredy exist')
    
 ],(req,res)=>{
@@ -99,17 +94,14 @@ app.post('/signupForm',[
         bcrypt.hash(req.body.password, saltRounds,  async function(err, hash) {
         data.password = hash
         res.send('ok')
-        data.save()  
-             
+        data.save()           
         });
-              
     }
 })
 app.post('/loginForm',[
         check('email').notEmpty().withMessage('  Fill in the email field blank').isEmail().withMessage('The form is incorrect '),
         check('password').notEmpty().withMessage(' Fill in the password field blank'),     
-        check('email').custom(  (value,{req})   => {
-       
+        check('email').custom(  (value,{req})   => {    
             return   UserModel.findOne({email:value}).then(user => {
                 if(!user){
                     return Promise.reject()
@@ -129,7 +121,6 @@ app.post('/loginForm',[
     async (req,res)=>{
     const errors = validationResult(req)
     let error = {}
-    let user = {}
         if (!errors.isEmpty()){
         
            errors.errors.forEach((i)=>{
@@ -141,22 +132,20 @@ app.post('/loginForm',[
           res.send([error])
         }
         else{
-            console.log(req.session.userId)
-            await UserModel.findOne({_id:req.session.userId}).then(result => {
-                user.name = result.name
-                user.surname = result.surname
-                user.age = result.age
-
-                
-                  
-            })
-        res.send(['ok',user])
+           
+        res.send(['ok'])
 
         }
 
 })
+app.post('/findUser', async (req,res)=>{
+    let user = {}
+    console.log('useri id',req.session.userId)
+
+    await UserModel.findOne({_id:req.session.userId}).then(result => {
+    })
+})
 app.post('/products',(req,res)=>{
     res.send([{name:'Mobile'}])  
 })
-//ete nodey ashxatum a menak vorpes server ete frameworkic inchvor tvyal petq e ga menq use petq e anenq
 app.listen(8000)

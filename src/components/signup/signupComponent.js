@@ -30,7 +30,7 @@ class SignupComponent extends React.Component{
       }
   }
   signupForm=(e)=>{
-    console.log(this.props.signupState)
+    console.log(this.props)
     e.preventDefault()
     this.props.signupActionForm(this.props.signupState)
   }
