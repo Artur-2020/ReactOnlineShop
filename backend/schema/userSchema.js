@@ -4,11 +4,7 @@ const validate = require('mongoose-validator');
   
 
 var  alphaValidator =  [
-    validate({
-        validator: 'isLength',
-        arguments: [3, 50],
-        message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
-      }),
+    
       validate({
         validator: 'isAlpha',
         passIfEmpty: true,

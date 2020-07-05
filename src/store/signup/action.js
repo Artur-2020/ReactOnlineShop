@@ -23,7 +23,7 @@ export const changeSignupConfirmPassword = (a)=>{
     return {type:'signupErrors',value:a}
 }
 
-export const signupForm = (data) => {
+export const signupForm = (data,history) => {
     let errors={name:'',surname:'',age:'',email:'',password:'',confirmPassword:''}
 
     return dispatch=>{
@@ -33,6 +33,7 @@ export const signupForm = (data) => {
                 dispatch({
                     type:'all'
                 })
+                history.push({pathname:'/login'})
             }
             else{
                 

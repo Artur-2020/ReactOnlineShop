@@ -27,6 +27,7 @@ class App extends React.Component{
        <Router>
          <Route path='/login' component={LoginContainer}/>
          <Route path='/profile' exact component={ProfileContainer}/>
+         <Route path='/product'  component={ProductContainer}/>
          <Route path='/' exact component={SignupContainer}/>
        </Router>
 

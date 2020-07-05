@@ -19,6 +19,7 @@ class LoginComponent extends React.Component{
     loginForm = (e)=>{
       e.preventDefault()
       this.props.loginActionForm(this.props.loginState,this.props.history)
+      console.log(this.props.loginState)
       
     }
     render(){

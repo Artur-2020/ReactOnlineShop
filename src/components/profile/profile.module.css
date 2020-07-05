@@ -1,3 +1,66 @@
 .main{
+    margin-bottom: 40px;
+    margin-left: 30px;
+}
+.user{
+    text-align: center;
+    width: 250px;
+    height: 350px;
+    border:1px solid #464E56;
+}
+.logOut{
+    color: white;
+    border:none;
+    background-color: #343A40;
+    width: 80px;
+    height: 20px;
+    font-size: 10px;
+    margin-bottom: 30px;
+    transition: 0.3s;
+}
+.logOut:hover{
+    background-color:#464E56 ;
+}
+.imageParent{
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid;
+}
+.info{
+    margin: auto;
+    width: 150px;
+    height: auto;
+    /* border: 1px solid; */
+}
+.saveBtn{
+    color: white;
+    background-color:#464E56 ;
+    margin-top: 20px;
+    width: 100px;
+    border: none;
+}
+.infoEditMain{
     margin-top: 150px;
+    display: flex;
+}
+.editMain{
+    padding: 15px;
+    width: 250px;
+    height: auto;
+    border:1px solid #464E56;
+    margin-top: 50px;
+    margin-left: 150px;
+}
+.inp{
+    display: block; 
+}
+.error{
+    color: red;
+}
+span{
+    display: block;
 }
