@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-export const changeUserInfo = (history,location,login) => {
-    console.log(login)
+export const changeUserInfo = (history,location) => {
     let id = ''
     return dispatch => {
         if(location.state.id != undefined){
              id = location.state.id 
+             localStorage.setItem('userId',id)
              axios.post('http://localhost:8000/findUser',{id})
             .then((result) => {
-                if(result.data === 'error' || login.id ==''){
+                if(result.data === 'error'){
                     console.log(result.data)
                     history.push({pathname:'/login'})
 
@@ -41,11 +41,13 @@ export const LogOut = (history) => {
 
 export const EditData = (data) => {
     let errors = {name:'',surname:'',age:'',email:''}
-
+    let id = localStorage.getItem('userId')
+    data.id = id
     return dispatch => {
         axios.post('http://localhost:8000/editdata',data)
         .then((result) => {
-
+            let id = localStorage.getItem('userId')
+            console.log() 
            if(result.data[0] == 'ok'){
             dispatch({
                 type:'profileAll',value:data
@@ -61,7 +63,6 @@ export const EditData = (data) => {
                 if(errors[i]=='')
                 errors[i] = result.data[0][i]
             }
-            console.log(errors)
             const ChangeError = (err) =>{
                 dispatch(editErrors(err))
                 

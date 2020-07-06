@@ -10,9 +10,9 @@ export  const changeLoginPassword = (a) => {
 export const loginErrors = (a) =>{
     return {type:'loginErrors',value:a}
 }
-export const userId = (a) => {
-    return {type:'id',value:a}
-}
+// export const userId = (a) => {
+//     return {type:'id',value:a}
+// }
 
 
 
@@ -22,15 +22,19 @@ export const loginForm = (data,history) => {
     return dispatch=>{
         axios.post('http://localhost:8000/loginForm',data).
         then((result)=>{
-            console.log(result.data)
+            console.log(result.data[1])
             if(result.data[0]=='ok'){
                 dispatch({
                     type:'loginAll'
                 })
-                const changeId = (id) => {
-                    dispatch(userId(id))
-                }
-                changeId(result.data[1]) 
+                dispatch({
+                    type:'id',
+                    value: result.data[1]
+                })
+                // const changeId = (id) => {
+                //     dispatch(userId(id))
+                // }
+                // changeId(result.data[1]) 
 
 
                 history.push({pathname:'/profile',state:{id:result.data[1]}})

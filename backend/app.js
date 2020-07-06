@@ -10,6 +10,7 @@ const {check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+
 var mongoDB = 'mongodb://127.0.0.1/onlineShop';
 
 mongoose.connect(mongoDB);
@@ -139,6 +140,7 @@ app.post('/loginForm',[
 
 })
 app.post('/findUser', async (req,res)=>{
+    console.log('id',req.body.id)
    if(req.body.id != ''){
     let user = {}
 
@@ -162,8 +164,6 @@ app.post('/editdata',[
     check('email').custom(  value   => {
        
         return   UserModel.findOne({email:value}).then(user => {
-            console.log('useri email',user.email)
-            console.log('value',value)
             if(user){
                 return Promise.reject()
             }    
@@ -173,7 +173,7 @@ app.post('/editdata',[
 
    
 ],(req,res)=> {
-    console.log(req.session)    
+    console.log(req.body)
     const errors = validationResult(req)
     let error = {}
         if (!errors.isEmpty()){
@@ -186,6 +186,7 @@ app.post('/editdata',[
            res.send([error])       
         }
         else{
+            UserModel.updateOne({_id:req.body.id},{$set:{name:req.body.name,surname:req.body.surname,age:req.body.age,emaul:req.body.email}})
             res.send(['ok'])
         }
        

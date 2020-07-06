@@ -16,7 +16,7 @@ class ProfileContainer extends React.Component{
       return(
         <React.Fragment>
             <Header/>
-            <ProfileCompoonent loginState = {this.props.login} EditDataForm = {this.props.EditDataForm} changeValues = {this.props.changeValues  } changeId = {this.props.changeId} userInfo = {this.props.profileValues} logOut = {this.props.logOut} history = {this.props.history} location = {this.props.location} profileState = {this.props.profile} />
+            <ProfileCompoonent loginState = {this.props.login} EditDataForm = {this.props.EditDataForm} changeValues = {this.props.changeValues  } userInfo = {this.props.profileValues} logOut = {this.props.logOut} history = {this.props.history} location = {this.props.location} profileState = {this.props.profile} />
             <Footer/>
         </React.Fragment>
       )
@@ -33,9 +33,8 @@ class ProfileContainer extends React.Component{
   const mapDispatchToProps = (dispatch)=>{
     return {
       
-      profileValues:(history,location,login)=>{dispatch(AllActions.profileActions.changeUserInfo(history,location,login))},
+      profileValues:(history,location)=>{dispatch(AllActions.profileActions.changeUserInfo(history,location))},
       logOut:(history)=>{dispatch(AllActions.profileActions.LogOut(history))},
-      changeId:(value) =>{dispatch(AllActions.loginActions.userId(value))},
       changeValues:(value) => {dispatch(AllActions.profileActions.changeValues(value))},
       EditDataForm:(data) =>{dispatch(AllActions.profileActions.EditData(data))}
     }

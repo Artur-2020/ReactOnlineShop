@@ -1,5 +1,5 @@
 const profileState = {
-   user:{name:'',surname:'',age:'',email:''},
+   user:{id:'',name:'',surname:'',age:'',email:''},
    errors:{name:'',surname:'',age:'',email:''},
    changeValues:{name:'',surname:'',age:'',email:''}
 }
@@ -9,17 +9,17 @@ const profileReducer = (state=profileState,action) => {
         case 'profileAll':
             return {...state,user:action.value}   
         case 'logOut':
-            let a = {...state,user:{name:'',surname:'',age:'',email:''}}    
-            console.log(a)
-            return a
+             return {...state,user:{id:'',name:'',surname:'',age:'',email:''}}    
+           
         case 'editErrors':
-            console.log('errori reducery ashxatec')
             return {...state,errors:action.value}
+        case 'id':
+            profileState.user ={...profileState.user,id:action.value}
+            return {...state}
         case 'editValues':
 
-            let b = {...state,changeValues:action.value}
-            console.log(b)
-            return b
+            return  {...state,changeValues:action.value}
+            
         case 'editAll':
             return {...state,changeValues:{name:'',surname:'',age:'',email:''},errors:{name:'',surname:'',age:'',email:''},}    
         
