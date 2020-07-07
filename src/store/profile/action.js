@@ -2,11 +2,11 @@ import axios from 'axios'
 
 export const changeUserInfo = (history,location) => {
     let id = ''
+    let id1 = localStorage.getItem('userId')
     return dispatch => {
-        if(location.state.id != undefined){
-             id = location.state.id 
-             localStorage.setItem('userId',id)
-             axios.post('http://localhost:8000/findUser',{id})
+        if(id1 != undefined){
+             
+             axios.post('http://localhost:8000/findUser',{id1})
             .then((result) => {
                 if(result.data === 'error'){
                     console.log(result.data)

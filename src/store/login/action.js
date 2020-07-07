@@ -36,8 +36,8 @@ export const loginForm = (data,history) => {
                 // }
                 // changeId(result.data[1]) 
 
-
-                history.push({pathname:'/profile',state:{id:result.data[1]}})
+                localStorage.setItem('userId',result.data[1])
+                history.push({pathname:'/profile'})
             }
             else{
                 for(let i in result.data[0]){

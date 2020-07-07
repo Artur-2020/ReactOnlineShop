@@ -2,13 +2,17 @@ import React from 'react'
 import {connect} from 'react-redux'
 import ProductComponent from './productComponent.js'
 import AllActions from '../../store/action'
+import Header from '../header/headerComponent'
+import Footer from '../footer/footerComponent'
 
 class ProductContainer extends React.Component{
    
     render(){
       return(
         <React.Fragment>
-          <ProductComponent productState ={this.props.product} productActions={this.props.productActions} />
+          <Header/>
+          <ProductComponent productState ={this.props.product} showProducts={this.props.showProducts} />
+          <Footer/>
         </React.Fragment>
       )
     }
@@ -21,7 +25,7 @@ class ProductContainer extends React.Component{
   }
   const mapDispatchToProps = (dispatch) => {
     return{
-      productActions:()=>{ dispatch(AllActions.productActions.changeProduct())}
+      showProducts:()=>{ dispatch(AllActions.productActions.changeProduct())}
 
     }
   }

@@ -1,7 +1,7 @@
 const profileState = {
    user:{id:'',name:'',surname:'',age:'',email:''},
    errors:{name:'',surname:'',age:'',email:''},
-   changeValues:{name:'',surname:'',age:'',email:''}
+   changeValues:{name:'',surname:'',age:'',email:''},
 }
 const profileReducer = (state=profileState,action) => {
     switch(action.type){

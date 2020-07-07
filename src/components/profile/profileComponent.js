@@ -7,14 +7,17 @@ import axios from 'axios'
 class ProfileComponent extends React.Component{
   constructor(props){
     super(props)
-    this.props.userInfo(this.props.history,this.props.location)
-    console.log(this.props.profileState.user.id)
-    this.state = {
-      user:{name:'',surname:'',age:'',email:''}
-
-    }
+      let id = localStorage.getItem('userId')
+      if(id != undefined){
+        this.props.userInfo(this.props.history,this.props.location)
+      this.state = {
+        user:{name:'',surname:'',age:'',email:''}
+     }
+      }
+    
   } 
   logOut = () =>{
+    localStorage.removeItem('userId')
     this.props.logOut(this.props.history)
   }
   changeVal = (e) => {

@@ -4,15 +4,18 @@ import axios from 'axios';
 import {Provider} from 'react-redux'
 import Reducer from './store/reducer'
 import {createStore,applyMiddleware} from 'redux'
-// applyMiddleweare sinxroni haamar e
 import LoginContainer from './components/login/loginContainer'
 import SignupContainer from './components/signup/signupContainer'
 import ProductContainer from './components/product/productContainer.js'
 import ProfileContainer from './components/profile/profileContainer'
+import AddProductContainer from './components/addProduct/addProdctContainer'
 import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import productContainer from './components/product/productContainer.js';
 //thunkiu mijocov sinxronavorum enq vor actionnery sinxronavorvats ashxaten tvyaly ga nor action ashxati
 const Store = createStore(Reducer,applyMiddleware(thunk))
+// applyMiddleweare sinxroni haamar e
+
 
 class App extends React.Component{
   constructor(props){
@@ -24,10 +27,12 @@ class App extends React.Component{
     return(
      <Provider store = {Store}>
        <Router>
+         <Route path='/profile' component = {ProfileContainer}/>
          <Route path='/login' component={LoginContainer}/>
-         <Route path='/profile' exact component={ProfileContainer}/>
+         <Route path='/signup' exact component={SignupContainer}/>
          <Route path='/product'  component={ProductContainer}/>
-         <Route path='/' exact component={SignupContainer}/>
+         <Route path ='/addProduct' component = {AddProductContainer}/>
+         <Route path='/' exact component={productContainer}/>
        </Router>
 
      </Provider>
