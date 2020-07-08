@@ -14,6 +14,8 @@ export const addProductDescription = (a)=>{
 }
 export const addProductForm = (data) => {
     let errors={email:'',password:''}
+    let id = localStorage.getItem('userId')
+    data.id = id
 
     return dispatch=>{
         axios.post('http://localhost:8000/addProduct',data).

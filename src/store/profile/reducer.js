@@ -1,5 +1,5 @@
 const profileState = {
-   user:{id:'',name:'',surname:'',age:'',email:''},
+   user:{id:'',name:'',surname:'',age:'',email:'',product:[]},
    errors:{name:'',surname:'',age:'',email:''},
    changeValues:{name:'',surname:'',age:'',email:''},
 }
@@ -7,7 +7,9 @@ const profileReducer = (state=profileState,action) => {
     switch(action.type){
      
         case 'profileAll':
-            return {...state,user:action.value}   
+            let a = {...state,user:action.value}  
+            console.log(a)
+            return a
         case 'logOut':
              return {...state,user:{id:'',name:'',surname:'',age:'',email:''}}    
            

@@ -9,11 +9,15 @@ class ProfileComponent extends React.Component{
     super(props)
       let id = localStorage.getItem('userId')
       if(id != undefined){
-        this.props.userInfo(this.props.history,this.props.location)
-      this.state = {
-        user:{name:'',surname:'',age:'',email:''}
-     }
+          this.props.userInfo(this.props.history,this.props.location)
+             this.state = {
+                user:{name:'',surname:'',age:'',email:''}
+             }
       }
+      else{
+        this.props.history.push({pathname:"/login"})
+      }
+
     
   } 
   logOut = () =>{

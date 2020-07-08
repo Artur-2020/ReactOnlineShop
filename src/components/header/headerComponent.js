@@ -43,7 +43,7 @@ class Header extends React.Component{
                   <li><a href="#"> <i className="lni lni-dropbox"></i>My Products</a></li>
                   <li><a href="#"> <i  className="lni lni-star"/>Wishlist</a></li>
                   <li><a href="#"> <i  className="lni lni-cart"/> Cart</a></li>
-                  <li><Link to = '/'> <i  className='fa fa-user icons'></i>Sign Up</Link></li>
+                  <li><Link to = '/signup'> <i  className='fa fa-user icons'></i>Sign Up</Link></li>
                  <li> <Link  to='/login'><i  className="fa fa-user"/>Log In</Link></li>
                  <li> <Link  to='/profile'><i  className="fa fa-user"/>My Profile</Link></li>
 

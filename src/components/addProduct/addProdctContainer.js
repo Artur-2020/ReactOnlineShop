@@ -13,7 +13,7 @@ class LoginContainer extends React.Component{
       return(
         <React.Fragment>
           <Header/>
-          <AddProductCompponent addProductForm = {this.props.addProductForm} addProductState = {this.props.addProductState} addProductName = {this.props.addProductName} addProductCount = {this.props.addProductCount} addProductPrice = {this.props.addProductPrice} addProductDescription = {this.props.addProductDescription}   />
+          <AddProductCompponent history = {this.props.history} addProductForm = {this.props.addProductForm} addProductState = {this.props.addProductState} addProductName = {this.props.addProductName} addProductCount = {this.props.addProductCount} addProductPrice = {this.props.addProductPrice} addProductDescription = {this.props.addProductDescription}   />
           <Footer/>
         </React.Fragment>
       )

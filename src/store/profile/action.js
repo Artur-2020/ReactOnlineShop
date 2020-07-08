@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export const changeUserInfo = (history,location) => {
-    let id = ''
     let id1 = localStorage.getItem('userId')
     return dispatch => {
         if(id1 != undefined){

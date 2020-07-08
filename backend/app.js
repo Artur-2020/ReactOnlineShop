@@ -140,20 +140,28 @@ app.post('/loginForm',[
         }
 
 })
-app.post('/findUser', async (req,res)=>{
-    console.log('id',req.body.id)
+app.post('/findUser',  (req,res)=>{
    if(req.body.id1 != ''){
     let user = {}
 
-    await UserModel.findOne({_id:req.body.id1}).then(result => {
-        if(result){
-            user.name = result.name
-            user.surname = result.surname
-            user.age = result.age
-            user.email = result.email
-        }
-    })
-    res.send(user)
+    UserModel.
+    findOne({ _id: req.body.id1 }).
+    populate('product'). // only works if we pushed refs to children
+    exec(function (err, person) {
+      if (err) return err;
+      console.log(person);
+      
+        user.name = person.name
+        user.surname = person.surname
+        user.age = person.age
+        user.email = person.email
+        user.product = person.product
+        res.send (user)
+    
+    });
+
+
+    
    }
    else {
        res.send('error')
@@ -203,6 +211,8 @@ app.post('/addProduct',[
     check('price').notEmpty().withMessage('fill in the price field blank').isNumeric().withMessage('The price field should only contain a number'),
     check('count').notEmpty().withMessage('fill in the count field blank').isNumeric().withMessage(' The age field should only contain a number'),   
 ],(req,res)=>{
+    console.log(req.body)
+
     let product = new ProductModel ({
         name:req.body.name,
         count:req.body.count,
@@ -222,6 +232,9 @@ app.post('/addProduct',[
            res.send(error)       
         }
         else{
+            UserModel.updateOne({_id:req.body.id},{ $push: { 'product':product} }).then(result=> {
+                console.log(result)
+            })
             product.save()         
             res.send('ok')
         }
@@ -229,7 +242,6 @@ app.post('/addProduct',[
    
 })
 app.post('/products',(req,res)=>{
-
     ProductModel.find().then(result =>{
         console.log(result)
         res.send(result)
