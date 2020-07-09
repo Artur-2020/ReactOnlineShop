@@ -12,10 +12,14 @@ export const addProductPrice = (a)=>{
 export const addProductDescription = (a)=>{
     return {type:"addProductDescription",value:a}
 }
+export const addProductImage = (a) =>{
+    return {type:'addProductImage',value:a}
+}
 export const addProductForm = (data) => {
     let errors={email:'',password:''}
     let id = localStorage.getItem('userId')
     data.id = id
+    console.log('uxarkvox data',data)
 
     return dispatch=>{
         axios.post('http://localhost:8000/addProduct',data).

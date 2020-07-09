@@ -30,7 +30,36 @@ class Header extends React.Component{
          
           [styles.active]: this.state.isOpen,
         });
-        return(
+        if(localStorage.getItem('userId')){
+            return(
+              <header>
+              <div className={styles.container}>
+                <div className={styles.logo}>
+                  <h1 id ={styles.logo}>Art`s Shop</h1>
+                </div>
+                <nav className={btnClass}>
+                  <ul>
+                  <li> <Link  to='/'><i  className="lni lni-home"/>Shop</Link></li>
+                    <li> <Link  to='/addProduct'><i  className="fa fa-cart-plus"/>Add Product</Link></li>
+                    <li> <Link  to='/myProduct'><i className="lni lni-dropbox"></i>My Products</Link></li>
+                    <li><a href="#"> <i  className="lni lni-star"/>Wishlist</a></li>
+                    <li><a href="#"> <i  className="lni lni-cart"/> Cart</a></li>
+                  <li> <Link  to='/profile'><i  className="fa fa-user"/>My Profile</Link></li>
+
+
+                  </ul>
+                </nav>
+                <button className={btnClass} onClick={this.response} className={styles.navbar_toggler}> 
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+            </header>
+          )
+        }
+        else{
+          return(
             <header>
             <div className={styles.container}>
               <div className={styles.logo}>
@@ -39,13 +68,8 @@ class Header extends React.Component{
               <nav className={btnClass}>
                 <ul>
                 <li> <Link  to='/'><i  className="lni lni-home"/>Shop</Link></li>
-                  <li> <Link  to='/addProduct'><i  className="fa fa-cart-plus"/>Add Product</Link></li>
-                  <li><a href="#"> <i className="lni lni-dropbox"></i>My Products</a></li>
-                  <li><a href="#"> <i  className="lni lni-star"/>Wishlist</a></li>
-                  <li><a href="#"> <i  className="lni lni-cart"/> Cart</a></li>
                   <li><Link to = '/signup'> <i  className='fa fa-user icons'></i>Sign Up</Link></li>
                  <li> <Link  to='/login'><i  className="fa fa-user"/>Log In</Link></li>
-                 <li> <Link  to='/profile'><i  className="fa fa-user"/>My Profile</Link></li>
 
                 </ul>
               </nav>
@@ -57,6 +81,8 @@ class Header extends React.Component{
             </div>
           </header>
         )
+        }
+       
     }
      
 }

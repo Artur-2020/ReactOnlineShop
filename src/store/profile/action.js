@@ -8,14 +8,19 @@ export const changeUserInfo = (history,location) => {
              axios.post('http://localhost:8000/findUser',{id1})
             .then((result) => {
                 if(result.data === 'error'){
-                    console.log(result.data)
                     history.push({pathname:'/login'})
 
                 }
                 else{
+                    console.log(result.data)
+                
                     dispatch({
                         type:'profileAll',value:result.data
                     })
+                    
+                    // dispatch({
+                    //     type:'myProductShow',value:result.data.product
+                    // })
                 } 
             })
             .catch((error)=>{

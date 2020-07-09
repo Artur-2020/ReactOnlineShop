@@ -4,11 +4,9 @@ import styles from './addProduct.module.css'
 class addProductComponent extends React.Component{
   constructor(props){
     super(props)
-    console.log(this.props)
     
   }
   changeValue = (e) =>{
-      console.log(e.target.name)
     if(e.target.name == 'name'){
         this.props.addProductName(e.target.value)
     }
@@ -27,6 +25,11 @@ class addProductComponent extends React.Component{
     e.preventDefault()
     this.props.addProductForm(this.props.addProductState)
   }
+  uploadImage = (e)=>{
+    console.log(e.target.files[0])
+    this.props.addProductImage(e.target.files[0])
+
+  }
     
     render(){
       return(
@@ -42,6 +45,8 @@ class addProductComponent extends React.Component{
                     <input value = {this.props.addProductState.price}  name = 'price' onChange = {this.changeValue} className = {styles.inp} placeholder='price'/>
                 <p className= {styles.error}> {this.props.addProductState.errors.description}</p>    
                     <textarea value = {this.props.addProductState.description} name = 'description' onChange = {this.changeValue} className = {styles.inp} placeholder='description'/>
+                    <input type = 'file' className = {styles.inp} name = 'image' multiple onChange = {this.uploadImage}/>
+ 
                 <button className = {styles.addBtn} >Add</button>
             </form>
 

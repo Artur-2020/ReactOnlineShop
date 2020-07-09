@@ -4,13 +4,21 @@ const app=express()
 const bodyParser = require('body-parser') 
 const mongoose = require ('mongoose')
 const session = require('express-session')
-
 const {check, validationResult } = require('express-validator');
+const multer = require('multer')
 
+//set storage
+
+var storage = multer.diskStorage({   destination: function (req, file, cb) { 
+    cb(null, 'public/image')   },   filename: function (req, file, cb) {   
+    cb(null, Date.now()+file.originalname)    } })
+var upload = multer({ storage: storage })
+
+//hash
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-
+//mongo
 var mongoDB = 'mongodb://127.0.0.1/onlineShop';
 
 mongoose.connect(mongoDB);
@@ -21,6 +29,7 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 
+//models
 
 const UserModel = require('./schema/userSchema')
 const ProductModel = require('./schema/productSchema')
@@ -184,7 +193,6 @@ app.post('/editdata',[
 
    
 ],(req,res)=> {
-    console.log(req.body)
     const errors = validationResult(req)
     let error = {}
         if (!errors.isEmpty()){
@@ -210,14 +218,15 @@ app.post('/addProduct',[
     check('name').notEmpty().withMessage('fill in the name field blank').isAlpha().withMessage('The name field should only contain a letter'),
     check('price').notEmpty().withMessage('fill in the price field blank').isNumeric().withMessage('The price field should only contain a number'),
     check('count').notEmpty().withMessage('fill in the count field blank').isNumeric().withMessage(' The age field should only contain a number'),   
-],(req,res)=>{
-    console.log(req.body)
+],upload.single('image'),(req,res)=>{
+    console.log(req.body.image)
 
     let product = new ProductModel ({
         name:req.body.name,
         count:req.body.count,
         price:req.body.price,
-        description:req.body.description
+        description:req.body.description,
+        user:req.body.id
 
     })
     const errors = validationResult(req)
@@ -243,7 +252,12 @@ app.post('/addProduct',[
 })
 app.post('/products',(req,res)=>{
     ProductModel.find().then(result =>{
-        console.log(result)
+        res.send(result)
+    })
+})
+app.post('/showMyProducts',(req,res)=>{
+
+    ProductModel.find({ user: req.body.id }).then(result => {
         res.send(result)
     })
 })

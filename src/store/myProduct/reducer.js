@@ -7,7 +7,11 @@ const myProductState = {
 const myProductReducer = (state = myProductState,action) => {
     switch(action.type){
         case 'myProductShow':
-            return {...state,product:action.value}
+            let a =  {...state,product:action.value}
+            console.log('myProducts',a)
+            return a
+        default: return state	
+
     }
 
 }

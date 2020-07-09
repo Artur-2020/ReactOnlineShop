@@ -8,7 +8,6 @@ const profileReducer = (state=profileState,action) => {
      
         case 'profileAll':
             let a = {...state,user:action.value}  
-            console.log(a)
             return a
         case 'logOut':
              return {...state,user:{id:'',name:'',surname:'',age:'',email:''}}    
