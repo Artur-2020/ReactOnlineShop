@@ -18,7 +18,8 @@ const productSchema = new Schema({
     count:{type:Number,required:true,},
     price:{type:Number,required:true},
     description:{type:String,required:false},
-    user:{type:Schema.Types.ObjectId,ref:'user'}
+    user:{type:Schema.Types.ObjectId,ref:'user'},
+    image:{type:String}
 })
 
 module.exports = mongoose.model('product',productSchema) 

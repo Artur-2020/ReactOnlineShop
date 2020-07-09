@@ -4,8 +4,7 @@ const addProductState = {
     count:'',
     price:'',
     description:'',
-    image:[],
-    user:'',
+    image:'',
     errors:{name:'',count:'',price:'',description:''}
 
 }
@@ -20,10 +19,7 @@ const addProductReducer = (state=addProductState,action) => {
         case 'addProductDescription':
             return {...state,description:action.value} 
         case 'addProductImage':
-            console.log('nkar',action.value)
-            let a = {...state,image:action.value}     
-            console.log(a)
-            return a  
+            return {...state,image:action.value}     
         case 'addProductErrors':
             return {...state,errors:action.value}
         case 'addProductAll':

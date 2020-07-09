@@ -26,7 +26,6 @@ class addProductComponent extends React.Component{
     this.props.addProductForm(this.props.addProductState)
   }
   uploadImage = (e)=>{
-    console.log(e.target.files[0])
     this.props.addProductImage(e.target.files[0])
 
   }

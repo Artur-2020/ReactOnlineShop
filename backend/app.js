@@ -167,10 +167,7 @@ app.post('/findUser',  (req,res)=>{
         user.product = person.product
         res.send (user)
     
-    });
-
-
-    
+    });   
    }
    else {
        res.send('error')
@@ -181,7 +178,7 @@ app.post('/editdata',[
     check('surname').notEmpty().withMessage('fill in the surname field blank').isAlpha().withMessage('The surname field should only contain a letter'),
     check('email').notEmpty().withMessage(' fill in the email field blank').isEmail().withMessage('The form is incorrect '),
     check('age').notEmpty().withMessage('fill in the age field blank').isNumeric().withMessage(' The age field should only contain a number'),   
-    check('email').custom(  value   => {
+    check('email').custom( value   => {
        
         return   UserModel.findOne({email:value}).then(user => {
             if(user){
@@ -219,7 +216,7 @@ app.post('/addProduct',[
     check('price').notEmpty().withMessage('fill in the price field blank').isNumeric().withMessage('The price field should only contain a number'),
     check('count').notEmpty().withMessage('fill in the count field blank').isNumeric().withMessage(' The age field should only contain a number'),   
 ],upload.single('image'),(req,res)=>{
-    console.log(req.body.image)
+    console.log('ekats tvyal',req.body)
 
     let product = new ProductModel ({
         name:req.body.name,
@@ -233,7 +230,7 @@ app.post('/addProduct',[
     let error = {}
         if (!errors.isEmpty()){
         
-           errors.errors.forEach((i)=>{
+           errors.errors.forEach((i)=>{ 
             if(error[i.param]==undefined){
                 error[i.param] = i.msg
               }
