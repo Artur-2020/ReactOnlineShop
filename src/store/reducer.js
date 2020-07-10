@@ -5,6 +5,7 @@ import productReducer from './product/reducer'
 import profileReducer from './profile/reducer'
 import addProductReducer from './addProduct/reducer'
 import myProductReducer from './myProduct/reducer'
+import cartReducer from  './cart/reducer'
 
 const reducer = combineReducers({
     loginState:loginReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
     profileState:profileReducer,
     addProductState:addProductReducer,
     myProductState:myProductReducer,
+    cartState:cartReducer
 })
 
 export default reducer 

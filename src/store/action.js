@@ -4,6 +4,7 @@ import * as productActions from './product/action'
 import * as profileActions from './profile/action'
 import * as addProductActions from './addProduct/action'
 import * as myProductActions from './myProduct/action'
+import * as cartActions from './cart/action'
 
 
-export default {signupActions,loginActions,productActions,profileActions,addProductActions,myProductActions}
+export default {signupActions,loginActions,productActions,profileActions,addProductActions,myProductActions,cartActions}

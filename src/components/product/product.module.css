@@ -2,6 +2,7 @@
     text-align: center;
     margin: auto;
     margin-top: 150px;
+    margin-bottom: 120px;
     width: 80%;
 }
 .products{
@@ -10,8 +11,15 @@
     flex-wrap: wrap;
 }
 .product{
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: auto;
     margin: 10px;
     border: 1px solid #30363B;
+}
+.addCart{
+    background-color: #343A40;
+    color: white;
+    width: 100px;
+    font-size: 20px;
+    border: none;
 }

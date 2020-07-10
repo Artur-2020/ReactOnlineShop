@@ -4,8 +4,7 @@ import styles from './myProduct.module.css'
 class myProductComponent extends React.Component{
   constructor(props){
     super(props)
-    console.log(this.props)
-    let id = localStorage.getItem('userId')
+      let id = localStorage.getItem('userId')
     if(!id){
         this.props.history.push({pathname:'/login'})
     }

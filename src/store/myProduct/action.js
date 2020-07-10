@@ -7,13 +7,7 @@ export const showMyProducts = () => {
             if(id != undefined){
                  
                  axios.post('http://localhost:8000/showMyProducts',{id})
-                .then((result) => {
-                    
-                    
-                        console.log(result.data)
-                    
-                       
-                        
+                .then((result) => {                       
                         dispatch({
                             type:'myProductShow',value:result.data
                         })

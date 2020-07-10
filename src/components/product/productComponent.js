@@ -5,7 +5,10 @@ class ProductComponent extends React.Component{
   constructor(props){
     super(props)
     this.props.showProducts()
-    console.log(this.props)
+  }
+  addCart = (value) => {
+    console.log('uxarkvox product',value)
+    this.props.addCart(value)
   }
     
     render(){
@@ -23,9 +26,14 @@ class ProductComponent extends React.Component{
                     <p className = {styles.productCount}>Count {product.count}</p>
                     <p className = {styles.productPrice}>Price {product.price}</p>
                     <p className = {styles.productDescription}>Description <br/> {product.description}</p>
-
+                    {
+                      (product.user === localStorage.getItem('userId'))?"":<button onClick = {this.addCart.bind(null,product)} className = {styles.addCart} > <i  className="lni lni-cart"/></button>
+                  
+                  }
                   </div>
+                  
                 )
+               
                         
               })
           }

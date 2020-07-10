@@ -15,3 +15,20 @@ export const changeProduct = ()=>{
         
     }
 }
+export const addCart = (product) => {
+    return function(dispatch){
+        axios.post('http://localhost:8000/addCart',product).
+        then((result)=>{
+            dispatch(
+                console.log(result.data)
+            )
+
+            
+            
+        }).
+        catch((error)=>{
+
+        })
+        
+    }
+}

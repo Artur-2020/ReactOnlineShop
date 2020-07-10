@@ -11,7 +11,7 @@ class ProductContainer extends React.Component{
       return(
         <React.Fragment>
           <Header/>
-          <ProductComponent productState ={this.props.product} showProducts={this.props.showProducts} />
+          <ProductComponent addCart = {this.props.addCart} productState ={this.props.product} showProducts={this.props.showProducts} />
           <Footer/>
         </React.Fragment>
       )
@@ -25,7 +25,8 @@ class ProductContainer extends React.Component{
   }
   const mapDispatchToProps = (dispatch) => {
     return{
-      showProducts:()=>{ dispatch(AllActions.productActions.changeProduct())}
+      showProducts:()=>{ dispatch(AllActions.productActions.changeProduct())},
+      addCart:(value)=>{ dispatch(AllActions.productActions.addCart(value))},
 
     }
   }

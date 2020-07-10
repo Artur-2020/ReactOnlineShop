@@ -10,6 +10,7 @@ import ProductContainer from './components/product/productContainer.js'
 import ProfileContainer from './components/profile/profileContainer'
 import AddProductContainer from './components/addProduct/addProdctContainer'
 import MyProductContainer from './components/myProduct/myProductContainer'
+import CartContainer from './components/cart/cartContainer'
 import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import productContainer from './components/product/productContainer.js';
@@ -28,6 +29,7 @@ class App extends React.Component{
     return(
      <Provider store = {Store}>
        <Router>
+         <Route path = '/cart' component = {CartContainer}/>
          <Route path = '/myProduct' component = {MyProductContainer}/>
          <Route path='/profile' component = {ProfileContainer}/>
          <Route path='/login' component={LoginContainer}/>

@@ -30,7 +30,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 
 //models
-
+const CartModel = require('./schema/cartProductSchema')
 const UserModel = require('./schema/userSchema')
 const ProductModel = require('./schema/productSchema')
 
@@ -257,5 +257,21 @@ app.post('/showMyProducts',(req,res)=>{
     ProductModel.find({ user: req.body.id }).then(result => {
         res.send(result)
     })
+})
+app.post('/addCart',(req,res)=>{
+    console.log('addCart',req.body)
+    res.send('added')
+    let product = new ProductModel ({
+        name:req.body.name,
+        count:req.body.count,
+        price:req.body.price,
+        description:req.body.description,
+        user:req.body.user,
+        
+
+    })
+})
+app.post('/showcart',(req,res)=> {
+    res.send('ok')
 })
 app.listen(8000)
