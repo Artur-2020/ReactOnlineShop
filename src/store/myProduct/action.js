@@ -23,3 +23,24 @@ export const showMyProducts = () => {
         }
     }
 }
+export const deleteFromMyProduct = (prod) => {
+    return function(dispatch){
+        let userId = localStorage.getItem('userId')
+        let id = prod._id
+        let image = prod.image
+        axios.post('http://localhost:8000/deleteFromMyProduct',{id,image,userId}).
+        then((result)=>{
+            
+           
+            
+            dispatch({type:'myProductShow',value:result.data})
+
+            
+        }).
+        catch((error)=>{
+            console.log(error)
+
+        })
+        
+    }
+}

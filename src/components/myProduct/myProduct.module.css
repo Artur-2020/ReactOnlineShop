@@ -5,13 +5,31 @@
     width: 80%;
 }
 .products{
+    margin-bottom: 100px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 .product{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: auto;
     margin: 10px;
     border: 1px solid #30363B;
+}
+.productImage{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+.delBtn{
+    background-color: red;
+    border: none;
+    width: 110px;
+    margin-bottom: 20px;
+    color: white;
+    transition: 0.5s;
+}
+.delBtn:hover{
+    background-color:#801600 ;
+
 }

@@ -3,6 +3,7 @@
     margin-left: 30px;
 }
 .user{
+    padding-top: 80px;
     text-align: center;
     width: 250px;
     height: 350px;
@@ -21,15 +22,7 @@
 .logOut:hover{
     background-color:#464E56 ;
 }
-.imageParent{
-    margin: auto;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 1px solid;
-}
+
 .info{
     margin: auto;
     width: 150px;

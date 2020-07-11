@@ -12,6 +12,10 @@ class myProductComponent extends React.Component{
         this.props.showMyProducts()
     }
   }
+  delete = (a) =>{
+    console.log('productId',a)
+    this.props.deleteFromMyProduct(a)
+  }
     
     render(){
       return(
@@ -24,10 +28,15 @@ class myProductComponent extends React.Component{
                 return(
 
                   <div className = {styles.product} key = {i}>
+                    {
+                      (product.image != '')? <img className = {styles.productImage} src = {`http://localhost:8000/image/${product.image}`}/>:''
+                    }
                     <p  className = {styles.productName}>Name {product.name}</p>
                     <p className = {styles.productCount}>Count {product.count}</p>
                     <p className = {styles.productPrice}>Price {product.price}</p>
                     <p className = {styles.productDescription}>Description <br/> {product.description}</p>
+                    <button className = {styles.delBtn} onClick = {this.delete.bind(this,product)}>Delete</button>
+
 
                   </div>
                 )

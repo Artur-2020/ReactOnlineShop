@@ -4,6 +4,11 @@ import styles from './addProduct.module.css'
 class addProductComponent extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      selectedFile:null,
+      time:'',
+    }
+    
     
   }
   changeValue = (e) =>{
@@ -23,10 +28,25 @@ class addProductComponent extends React.Component{
   }
   productForm = (e) => {
     e.preventDefault()
-    this.props.addProductForm(this.props.addProductState)
+    
+    if(this.state.selectedFile!=null){
+      let data = new FormData()
+      data.append('file',this.state.selectedFile)
+      data.append("Time", this.props.addProductState.file)
+      this.props.uploadImage(data)
+    }
+
+    this.props.addProductForm(this.props.addProductState,this.props.history)
   }
-  uploadImage = (e)=>{
-    this.props.addProductImage(e.target.files[0])
+  changeImageNameInState = (e)=>{
+    this.state.time = ''
+    this.state.time = Date.now()
+    e.target.files[0].time = this.state.time
+    this.state.selectedFile = e.target.files[0]
+
+    this.props.addProductImage(this.state.time+e.target.files[0].name)
+    this.setState({})
+
 
   }
     
@@ -44,7 +64,7 @@ class addProductComponent extends React.Component{
                     <input value = {this.props.addProductState.price}  name = 'price' onChange = {this.changeValue} className = {styles.inp} placeholder='price'/>
                 <p className= {styles.error}> {this.props.addProductState.errors.description}</p>    
                     <textarea value = {this.props.addProductState.description} name = 'description' onChange = {this.changeValue} className = {styles.inp} placeholder='description'/>
-                    <input type = 'file' className = {styles.inp} name = 'image' multiple onChange = {this.uploadImage}/>
+                    <input type = 'file' className = {styles.inp} name = 'file' multiple onChange = {this.changeImageNameInState  }/>
  
                 <button className = {styles.addBtn} >Add</button>
             </form>

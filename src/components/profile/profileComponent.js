@@ -42,7 +42,6 @@ class ProfileComponent extends React.Component{
           <div className={styles.main}>
              <button className={styles.logOut} onClick = {this.logOut} >Log Out</button>
              <div className = {styles.user}>
-              <div className={styles.imageParent}></div>
 
               <div className={styles.info}>
                   <i>{this.props.profileState.user.name} {this.props.profileState.user.surname} </i>

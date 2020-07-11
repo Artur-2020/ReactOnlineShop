@@ -4,7 +4,7 @@ const cartState = {
 const cartReducer = (state=cartState,action) =>{
 	switch(action.type){
 		case 'showCart':
-			 return  {...state,cart:action.value}
+			return  {...state,cart:action.value}
 		default: return state	
 	}
 

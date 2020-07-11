@@ -6,11 +6,14 @@ const mongoose = require ('mongoose')
 const session = require('express-session')
 const {check, validationResult } = require('express-validator');
 const multer = require('multer')
+const fs =  require('fs');
+
 
 //set storage
 
 var storage = multer.diskStorage({   destination: function (req, file, cb) { 
     cb(null, 'public/image')   },   filename: function (req, file, cb) {   
+        console.log('multeri file',file)
     cb(null, Date.now()+file.originalname)    } })
 var upload = multer({ storage: storage })
 
@@ -34,12 +37,13 @@ const CartModel = require('./schema/cartProductSchema')
 const UserModel = require('./schema/userSchema')
 const ProductModel = require('./schema/productSchema')
 
-
 app.use(session({
     secret: '1234',
     resave: false,
     saveUninitialized: true
   }))
+
+  app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -85,7 +89,6 @@ app.post('/signupForm',[
        if (!Exerrors.isEmpty()){
                emerror.email = Exerrors.errors[0].msg   
        }
-       
   
    let data = new UserModel({
         name:req.body.name,
@@ -111,7 +114,7 @@ app.post('/signupForm',[
 app.post('/loginForm',[
         check('email').notEmpty().withMessage('  Fill in the email field blank').isEmail().withMessage('The form is incorrect '),
         check('password').notEmpty().withMessage(' Fill in the password field blank'),     
-        check('email').custom(  (value,{req})   => {    
+        check('email').custom(  (value,{req})  => {    
             return   UserModel.findOne({email:value}).then(user => {
                 if(!user){
                     return Promise.reject()
@@ -212,18 +215,19 @@ app.post('/editdata',[
 
 })
 app.post('/addProduct',[
-    check('name').notEmpty().withMessage('fill in the name field blank').isAlpha().withMessage('The name field should only contain a letter'),
+    check('name').notEmpty().withMessage('fill in the name field blank'),
     check('price').notEmpty().withMessage('fill in the price field blank').isNumeric().withMessage('The price field should only contain a number'),
     check('count').notEmpty().withMessage('fill in the count field blank').isNumeric().withMessage(' The age field should only contain a number'),   
-],upload.single('image'),(req,res)=>{
+],(req,res)=>{
     console.log('ekats tvyal',req.body)
-
+    let img = req.body.file
     let product = new ProductModel ({
         name:req.body.name,
         count:req.body.count,
         price:req.body.price,
         description:req.body.description,
-        user:req.body.id
+        user:req.body.id,
+        image:img
 
     })
     const errors = validationResult(req)
@@ -259,19 +263,71 @@ app.post('/showMyProducts',(req,res)=>{
     })
 })
 app.post('/addCart',(req,res)=>{
+
     console.log('addCart',req.body)
+
     res.send('added')
-    let product = new ProductModel ({
+    let cart = new CartModel ({
+        productId:req.body._id,
         name:req.body.name,
         count:req.body.count,
         price:req.body.price,
         description:req.body.description,
         user:req.body.user,
-        
-
+        myCount:1,
+        image:req.body.image
+    })
+    CartModel.findOne({productId:req.body._id}).then(result =>{
+        console.log(result)
+        if(result == null){
+            cart.save()
+        }
+        else{
+            if(result.myCount<result.count){
+                CartModel.updateOne({productId:req.body._id},{$inc:{myCount:1}}).then(result2 => {
+                    console.log('poxvac',result2)
+                })
+            }
+           
+        }
     })
 })
 app.post('/showcart',(req,res)=> {
-    res.send('ok')
+    CartModel.find().then(result =>{
+        res.send(result)
+    })
+})
+app.post('/upload',upload.single('file'),(req,res)=>{
+    console.log('pti ga prinipi senc',req.body.Time)
+    console.log('file',req.file)
+    ProductModel.updateOne({image:req.body.Time},{$set:{image:req.file.filename}}).then(result => [
+        console.log('jamy poxeci',result)
+    ])
+    res.send('file')
+})
+app.post('/deleteFromCart',(req,res)=>{
+    console.log(req.body.id)
+    CartModel.deleteOne({_id:req.body.id}).then(result=>{
+        console.log('deleted',result)
+    })
+    CartModel.find().then(result =>{
+        res.send(result)
+    })
+})
+app.post('/deleteFromMyProduct',(req,res)=>{
+    console.log(req.body.id)
+    ProductModel.deleteOne({_id:req.body.id}).then(result=>{
+        console.log('deleted',result)
+    })
+    let name = `public/image/${req.body.image}`
+    console.log('jnjvox nkar',name)
+    fs.unlink(`${name}`, function (err) {
+        if (err) throw err;
+        // if no error, file has been deleted successfully
+        console.log('File deleted!');
+    }); 
+    ProductModel.find({user:req.body.userId}).then(result =>{
+        res.send(result)
+    })
 })
 app.listen(8000)

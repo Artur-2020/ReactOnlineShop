@@ -1,3 +1,35 @@
 .main{
+    text-align: center;
+    margin: auto;
     margin-top: 150px;
+    width: 80%;
+}
+.products{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+.product{
+    margin: 10px;
+    width: 300px;
+    height: auto;
+    border: 1px solid #30363B;
+}
+.productImage{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+.delBtn{
+    background-color: red;
+    border: none;
+    width: 110px;
+    margin-bottom: 20px;
+    color: white;
+    transition: 0.5s;
+}
+.delBtn:hover{
+    background-color:#801600 ;
+
 }

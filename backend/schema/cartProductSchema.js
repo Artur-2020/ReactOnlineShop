@@ -10,7 +10,8 @@ const cartProductSchema = new Schema({
     description:{type:String},
     user:{type:Schema.Types.ObjectId,ref:'user'},
     image:{type:String},
-    myCount:{type:Number}
+    myCount:{type:Number},
+    productId:{type:Schema.Types.ObjectId,ref:'product'}
 
 })
 

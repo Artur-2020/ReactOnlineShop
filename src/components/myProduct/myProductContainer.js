@@ -11,7 +11,7 @@ class MyProductContainer extends React.Component{
       return(
         <React.Fragment>
           <Header/>
-          <MyProductComponent showMyProducts = {this.props.showMyProducts} history = {this.props.history} myProductState = {this.props.myproduct} />
+          <MyProductComponent deleteFromMyProduct = {this.props.deleteFromMyProduct} showMyProducts = {this.props.showMyProducts} history = {this.props.history} myProductState = {this.props.myproduct} />
           <Footer/>
         </React.Fragment>
       )
@@ -27,6 +27,8 @@ class MyProductContainer extends React.Component{
     return {
       
       showMyProducts:()=>{dispatch( AllActions.myProductActions.showMyProducts())},
+      deleteFromMyProduct:(id)=>{dispatch( AllActions.myProductActions.deleteFromMyProduct(id))},
+
       
   }
 }

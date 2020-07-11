@@ -13,7 +13,7 @@ class LoginContainer extends React.Component{
       return(
         <React.Fragment>
           <Header/>
-          <AddProductCompponent addProductImage ={this.props.addProductImage} history = {this.props.history} addProductForm = {this.props.addProductForm} addProductState = {this.props.addProductState} addProductName = {this.props.addProductName} addProductCount = {this.props.addProductCount} addProductPrice = {this.props.addProductPrice} addProductDescription = {this.props.addProductDescription}   />
+          <AddProductCompponent history = {this.props.history} uploadImage = {this.props.addProductUpload} addProductImage ={this.props.addProductImage} history = {this.props.history} addProductForm = {this.props.addProductForm} addProductState = {this.props.addProductState} addProductName = {this.props.addProductName} addProductCount = {this.props.addProductCount} addProductPrice = {this.props.addProductPrice} addProductDescription = {this.props.addProductDescription}   />
           <Footer/>
         </React.Fragment>
       )
@@ -32,7 +32,9 @@ class LoginContainer extends React.Component{
       addProductPrice:(value)=>{dispatch(AllActions.addProductActions.addProductPrice(value))},
       addProductDescription:(value)=>{dispatch(AllActions.addProductActions.addProductDescription(value))},
       addProductImage:(value)=>{dispatch(AllActions.addProductActions.addProductImage(value))},
-      addProductForm:(data)=>{dispatch(AllActions.addProductActions.addProductForm(data))},
+      addProductForm:(data,history)=>{dispatch(AllActions.addProductActions.addProductForm(data,history))},
+      addProductUpload:(data)=>{dispatch(AllActions.addProductActions.uploadImage(data))},
+
 
 
     }

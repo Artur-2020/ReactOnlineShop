@@ -4,7 +4,7 @@ const addProductState = {
     count:'',
     price:'',
     description:'',
-    image:'',
+    file:'',
     errors:{name:'',count:'',price:'',description:''}
 
 }
@@ -19,7 +19,7 @@ const addProductReducer = (state=addProductState,action) => {
         case 'addProductDescription':
             return {...state,description:action.value} 
         case 'addProductImage':
-            return {...state,image:action.value}     
+            return {...state,file:action.value}     
         case 'addProductErrors':
             return {...state,errors:action.value}
         case 'addProductAll':

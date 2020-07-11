@@ -15,10 +15,10 @@ export const addProductDescription = (a)=>{
 export const addProductImage = (a) =>{
     return {type:'addProductImage',value:a}
 }
-export const addProductForm = (data) => {
+export const addProductForm = (data,history) => {
     let id = localStorage.getItem('userId')
     data.id = id
-    console.log('uxarkvox data',data)
+   
 
     return dispatch=>{
         axios.post('http://localhost:8000/addProduct',data).
@@ -28,7 +28,12 @@ export const addProductForm = (data) => {
                 dispatch({
                     type:'addProductAll'
                 })
+                function Go(){
+                     history.push({pathname:'/'})
+                }
+                setTimeout(Go, 2000);
             }
+
             else{
                 dispatch({
                     type:'addProductErrors',value:result.data
@@ -42,3 +47,17 @@ export const addProductForm = (data) => {
         })
     }
 }
+export const uploadImage = (file)=>{
+    return dispatch=>{
+        axios.post('http://localhost:8000/upload',file).
+        then((result)=>{
+            console.log(result.data)
+            
+           dispatch({type:'4545as454s5a4'})
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+
+    }
+}    
