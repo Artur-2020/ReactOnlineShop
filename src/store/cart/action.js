@@ -37,3 +37,11 @@ export const showCart = (a)=>{
         
     }
 }
+export const changeTotalPrice =(cart) =>{
+    let sum = 0
+    for(let i = 0;i<cart.length;i++){
+        sum+=cart[i].price*cart[i].myCount
+    }
+    console.log('gin hashvox actiony ashxatec',cart,sum)
+    return {type:'changeTotalPrice',value:sum}
+}

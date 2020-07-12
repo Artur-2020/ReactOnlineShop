@@ -22,10 +22,10 @@
     width: 100px;
     font-size: 20px;
     border: none;
+    margin-bottom: 40px;
 }
 .productImage{
     width: 200px;
     height: 200px;
     object-fit: contain;
-
 }

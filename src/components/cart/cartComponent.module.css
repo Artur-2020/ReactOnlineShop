@@ -31,5 +31,23 @@
 }
 .delBtn:hover{
     background-color:#801600 ;
-
+}
+.totalBuy{
+    position:fixed;
+    right: 50px;
+    width: 100px;
+    height: 150px;
+}
+.totalBuy > p{
+    font-size: 18px;
+}
+.totalBuy > button{
+    width: 100px;
+    background-color: green;
+    color: white;
+    border: none;
+    transition: 0.5s;
+}
+.totalBuy > button:hover{
+    background-color: #005C00;
 }

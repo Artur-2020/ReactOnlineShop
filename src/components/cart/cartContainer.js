@@ -11,7 +11,7 @@ class CartContainer extends React.Component{
       return(
         <React.Fragment>
           <Header/>
-          <CartComponent deleteFromCart = {this.props.deleteFromCart} cartState = {this.props.cart} showCart = {this.props.showCart}  />
+          <CartComponent history = {this.props.history} changeTotalPrice ={this.props.changeTotalPrice} deleteFromCart = {this.props.deleteFromCart} cartState = {this.props.cart} showCart = {this.props.showCart}  />
           <Footer/>
         </React.Fragment>
       )
@@ -26,7 +26,9 @@ class CartContainer extends React.Component{
   const mapDispatchToProps = (dispatch) => {
     return{
       showCart:(value)=>{ dispatch(AllActions.cartActions.showCart(value))},
-      deleteFromCart:(id)=>{ dispatch(AllActions.cartActions.deleteFromCart(id))}
+      deleteFromCart:(id)=>{ dispatch(AllActions.cartActions.deleteFromCart(id))},
+      changeTotalPrice:(cart)=>{ dispatch(AllActions.cartActions.changeTotalPrice(cart))},
+
 
 
     }

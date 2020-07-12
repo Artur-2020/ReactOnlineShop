@@ -6,18 +6,50 @@ class CartComponent extends React.Component{
   constructor(props){
     super(props)
     this.props.showCart()
+
+    setTimeout(
+      function() {
+          this.showTotal();
+      }
+      .bind(this),
+      300
+  );
   } 
+  
+
   delete = (a) =>{
     console.log('jnjelu id',a)
     this.props.deleteFromCart(a)
+    setTimeout(
+      function() {
+          this.showTotal();
+      }
+      .bind(this),
+      300
+  );
+
 
   }
-    
+  showTotal = () =>{
+    this.props.changeTotalPrice(this.props.cartState.cart)
+  }    
+  buy = () =>{
+    console.log('gin',)
+    this.props.history.push({pathname:'/payment',state:this.props.cartState.totalPrice})
+  }
+
     render(){
       return(
         <div>
         <div className = {styles.main}>
           <h1>Cart</h1>
+
+
+          <div className = {styles.totalBuy}>
+           <p>Total Price {this.props.cartState.totalPrice} $ </p>
+          <button onClick = {this.buy} >Buy All</button>
+
+          </div>
           <div className = {styles.products}>
           {
              this.props.cartState.cart.map((product,i)=>{          
@@ -32,7 +64,9 @@ class CartComponent extends React.Component{
                     <p className = {styles.productCount}>Count {product.count}</p>
                     <p className = {styles.productPrice}>Price {product.price}</p>
                     <p className = {styles.productDescription}>Description <br/> {product.description}</p>
+                    <p>My Count {product.myCount}</p>
                     <button className = {styles.delBtn} onClick = {this.delete.bind(this,product._id)}>Delete</button>
+                    
 
                   </div>
                 )
