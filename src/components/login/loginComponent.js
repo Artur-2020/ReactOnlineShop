@@ -39,7 +39,7 @@ class LoginComponent extends React.Component{
            </form>
        </div>
      <div className={styles.link}>
-         <p>If you don`t have a account click here! <span><Link className={styles.logLink} to='/'>Registration</Link></span></p>
+         <p>If you don`t have a account click here! <span><Link className={styles.logLink} to='/signup'>Registration</Link></span></p>
      </div>
    </div>
      

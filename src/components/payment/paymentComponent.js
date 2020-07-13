@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './payment.module.css'
-
+import Checkout from '../../Checkout'
 class PaymentComponent extends React.Component{
   constructor(props){
     super(props)
@@ -21,7 +21,7 @@ class PaymentComponent extends React.Component{
       return(
       <div>
         <div className = {styles.main}>
-        <form onSubmit = {this.paymentForm}>
+        {/* <form className = {styles.form} onSubmit = {this.paymentForm}>
     <div className={styles.form_header}>
       <h3>Payment</h3>
       <div>
@@ -46,12 +46,17 @@ class PaymentComponent extends React.Component{
         <label className = {styles.label} >Expiration Year
           <input onKeyPress = {this.inpPres} className = {styles.inp} type="text" id="year" placeholder="YYYY"/>
         </label>
+
       </div>
       <button className = {styles.btn}>Pay Now {this.props.paymentState.totalPrice} $ </button>
     </div>
-  </form>
+  </form> */}
        
-        
+       <Checkout
+            name={'The Road to learn React'}
+            description={'Only the Book'}
+            amount={this.props.paymentState.totalPrice}
+          />
        
 
         </div>

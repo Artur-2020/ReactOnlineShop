@@ -8,7 +8,13 @@ const {check, validationResult } = require('express-validator');
 const multer = require('multer')
 const fs =  require('fs');
 
-
+const configureStripe = require('stripe');
+ 
+const STRIPE_SECRET_KEY = process.env.NODE_ENV === 'production'
+    ? 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C'
+    : 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C';
+ 
+const stripe = configureStripe(STRIPE_SECRET_KEY);
 //set storage
 
 var storage = multer.diskStorage({   destination: function (req, file, cb) { 
@@ -329,5 +335,18 @@ app.post('/deleteFromMyProduct',(req,res)=>{
     ProductModel.find({user:req.body.userId}).then(result =>{
         res.send(result)
     })
+})
+
+const postStripeCharge = res => (stripeErr, stripeRes) => {
+    if (stripeErr) {
+      res.status(500).send({ error: stripeErr });
+    } else {
+      res.status(200).send({ success: stripeRes });
+    }
+  }
+
+app.post('/stripe',(req, res)=>{
+    stripe.charges.create(req.body, postStripeCharge(res));
+
 })
 app.listen(8000)

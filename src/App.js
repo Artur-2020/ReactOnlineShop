@@ -1,4 +1,5 @@
 import React from 'react';
+import Checkout from './Checkout';
 import './App.css';
 import axios from 'axios';
 import {Provider} from 'react-redux'
@@ -40,8 +41,11 @@ class App extends React.Component{
          <Route path='/' exact component={productContainer}/>
          <Route path ='/payment' component = {PaymentContainer}/>
        </Router>
+       
+
 
      </Provider>
+     
     )
   }
 }
