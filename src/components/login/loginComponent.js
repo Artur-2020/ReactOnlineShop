@@ -6,6 +6,7 @@ import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 class LoginComponent extends React.Component{
   constructor(props){
     super(props)
+    console.log(this.props)
   }
     changeValue = (e)=>{
       if(e.target.name=='email'){

@@ -1,7 +1,5 @@
 import React from 'react';
-import Checkout from './Checkout';
 import './App.css';
-import axios from 'axios';
 import {Provider} from 'react-redux'
 import Reducer from './store/reducer'
 import {createStore,applyMiddleware} from 'redux'
@@ -11,8 +9,9 @@ import ProductContainer from './components/product/productContainer.js'
 import ProfileContainer from './components/profile/profileContainer'
 import AddProductContainer from './components/addProduct/addProdctContainer'
 import MyProductContainer from './components/myProduct/myProductContainer'
+import SearchContainer from './components/search/searchContainer'
 import CartContainer from './components/cart/cartContainer'
-import PaymentContainer from './components/payment/paymentContainer'
+import HeaderContainer from './components/header/headerContainer'
 import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import productContainer from './components/product/productContainer.js';
@@ -39,13 +38,14 @@ class App extends React.Component{
          <Route path='/product'  component={ProductContainer}/>
          <Route path ='/addProduct' component = {AddProductContainer}/>
          <Route path='/' exact component={productContainer}/>
-         <Route path ='/payment' component = {PaymentContainer}/>
+         <Route path = '/search/:id' component = {SearchContainer}/>
+         <Route path = '**' component = {HeaderContainer}/>
        </Router>
-       
 
 
      </Provider>
-     
+
+    
     )
   }
 }

@@ -6,7 +6,8 @@ import profileReducer from './profile/reducer'
 import addProductReducer from './addProduct/reducer'
 import myProductReducer from './myProduct/reducer'
 import cartReducer from  './cart/reducer'
-import paymentReducer from './payment/reducer'
+import headerReducer from './header/reducer'
+import searchReducer from './search/reducer'
 
 const reducer = combineReducers({
     loginState:loginReducer,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
     addProductState:addProductReducer,
     myProductState:myProductReducer,
     cartState:cartReducer,
-    paymentState:paymentReducer,
+    headerState:headerReducer,
+    searchState:searchReducer
 })
 
 export default reducer 

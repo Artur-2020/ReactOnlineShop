@@ -6,8 +6,9 @@ import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 var classNames = require('classnames');
 
 class Header extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
+        console.log('headeri props',this.props)
 
        this.state ={
          isOpen:false,
@@ -23,6 +24,13 @@ class Header extends React.Component{
       }
       // console.log(true)
       this.setState({})
+    }
+    change = (e)=>{
+      this.props.changeValue(e.target.value)
+    }
+    searchResult = ()=>{
+      console.log('searchi btnAshxatec')
+      this.props.openSearch(this.props.history,this.props.headerState.searchValue)
     }
     
       render(){
@@ -45,6 +53,7 @@ class Header extends React.Component{
                     <li><a href="#"> <i  className="lni lni-star"/>Wishlist</a></li>
                     <li> <Link  to='/cart'><i  className="lni lni-cart"/> Cart</Link></li>  
                   <li> <Link  to='/profile'><i  className="fa fa-user"/>My Profile</Link></li>
+                  <li><input onChange = {this.change}  value ={this.props.headerState.searchValue}  className= {styles.searchInp} placeholder='enter search value'/>  <button onClick = {this.searchResult} className={styles.searchBtn} >Sarch</button></li>
 
 
                   </ul>

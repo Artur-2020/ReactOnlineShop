@@ -1,7 +1,7 @@
 import React from 'react'
 import AllActions from '../../store/action'
 import {connect} from 'react-redux'
-import Header from '../header/headerComponent'
+import Header from '../header/headerContainer'
 import Footer from '../footer/footerComponent'
 import MyProductComponent from './myProductComponent'
 

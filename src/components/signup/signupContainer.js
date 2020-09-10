@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import SignupComponent from './signupComponent'
 import AllActions from '../../store/action'
 import Footer from '../footer/footerComponent'
-import Header from '../header/headerComponent'
+import Header from '../header/headerContainer'
+
 
 class SignupContainer extends React.Component{
 
@@ -12,7 +13,7 @@ class SignupContainer extends React.Component{
     render(){
       return(
         <React.Fragment>
-            <Header/>
+            {/* <Header/> */}
             <SignupComponent signupState={this.props.signup} signupActionName ={this.props.signupActionName} signupActionSurname ={this.props.signupActionSurname} signupActionAge ={this.props.signupActionAge} signupActionEmail ={this.props.signupActionEmail} signupActionPassword={this.props.signupActionPassword} signupActionConfirmPassword={this.props.signupActionConfirmPassword} signupActionForm = {this.props.signupActionSignupForm} history = {this.props.history} />
             <Footer/>
 

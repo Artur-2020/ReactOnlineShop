@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from './cartComponent.module.css'
+import Checkout from '../../Checkout'
+
 
 
 class CartComponent extends React.Component{
@@ -46,9 +48,12 @@ class CartComponent extends React.Component{
 
 
           <div className = {styles.totalBuy}>
-           <p>Total Price {this.props.cartState.totalPrice} $ </p>
-          <button onClick = {this.buy} >Buy All</button>
-
+           
+        <Checkout
+            name={'The Road to learn React'}
+            description={'Only the Book'}
+            amount={this.props.cartState.totalPrice}
+          />
           </div>
           <div className = {styles.products}>
           {

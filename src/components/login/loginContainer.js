@@ -3,16 +3,21 @@ import {connect} from 'react-redux'
 //es connecti mijocov containeri hamar stori arjeqy dardznelu enq hasaneli
 import LoginComponent from './loginComponent';
 import AllActions from '../../store/action'
-import Header from '../header/headerComponent'
+import Header from '../header/headerContainer'
 import Footer from '../footer/footerComponent'
 
 
 class LoginContainer extends React.Component{
-   
+    constructor(props){
+      super(props)
+        console.log(this.props)
+      
+    } 
+
     render(){
       return(
         <React.Fragment>
-          <Header/>
+          {/* <Header/> */}
           <LoginComponent loginState ={this.props.login} loginActionEmail={this.props.loginActionEmail} loginActionPassword = {this.props.loginActionPassword} loginActionForm = {this.props.loginActionLoginForm} history = {this.props.history}  />
           <Footer/>
         </React.Fragment>

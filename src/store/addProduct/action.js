@@ -31,7 +31,7 @@ export const addProductForm = (data,history) => {
                 function Go(){
                      history.push({pathname:'/'})
                 }
-                setTimeout(Go, 2000);
+                setTimeout(Go, 1200);
             }
 
             else{

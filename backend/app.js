@@ -2,32 +2,14 @@
 const express = require('express') 
 const app=express()
 const bodyParser = require('body-parser') 
-const mongoose = require ('mongoose')
 const session = require('express-session')
-const {check, validationResult } = require('express-validator');
-const multer = require('multer')
-const fs =  require('fs');
 
 const configureStripe = require('stripe');
- 
-const STRIPE_SECRET_KEY = process.env.NODE_ENV === 'production'
-    ? 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C'
-    : 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C';
- 
-const stripe = configureStripe(STRIPE_SECRET_KEY);
-//set storage
-
-var storage = multer.diskStorage({   destination: function (req, file, cb) { 
-    cb(null, 'public/image')   },   filename: function (req, file, cb) {   
-        console.log('multeri file',file)
-    cb(null, Date.now()+file.originalname)    } })
-var upload = multer({ storage: storage })
-
-//hash
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 //mongo
+const mongoose = require ('mongoose')
+
+
 var mongoDB = 'mongodb://127.0.0.1/onlineShop';
 
 mongoose.connect(mongoDB);
@@ -37,6 +19,21 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;   
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+
+
+const router = require('./router')
+
+ 
+const STRIPE_SECRET_KEY = process.env.NODE_ENV === 'production'
+    ? 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C'
+    : 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C';
+ 
+const stripe = configureStripe(STRIPE_SECRET_KEY);
+//set storage
+
+
+//mongo
+
 
 //models
 const CartModel = require('./schema/cartProductSchema')
@@ -53,6 +50,7 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -72,270 +70,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.post('/signupForm',[    
-    check('email').custom(  value   => {
-       
-       return   UserModel.findOne({email:value}).then(user => {
-           if(user){
-               return Promise.reject()
-           }    
-       })       
-     }).withMessage('Emaily allredy exist')
-   
-],(req,res)=>{
-    let confirmErr = ''
-    if(req.body.confirmPassword==''){
-        confirmErr='Path `confirmPassword` is required.' 
-    }
-   if( req.body.confirmPassword!='' && req.body.confirmPassword != req.body.password){
-    confirmErr='Passwordes don`t match '
-   }
-   let Exerrors = validationResult(req)
-   let emerror = {email:''}
-       if (!Exerrors.isEmpty()){
-               emerror.email = Exerrors.errors[0].msg   
-       }
-  
-   let data = new UserModel({
-        name:req.body.name,
-        surname:req.body.surname,
-        age:req.body.age,
-        email:req.body.email,
-        password:req.body.password
-    })
-    const errors = data.validateSync()
-       
-    if(errors!=undefined || confirmErr!='' || emerror.email!=''){
-        
-        res.send([errors,confirmErr,emerror])
-    }
-    else{
-        bcrypt.hash(req.body.password, saltRounds,  async function(err, hash) {
-        data.password = hash
-        res.send('ok')
-        data.save()           
-        });
-    }
-})
-app.post('/loginForm',[
-        check('email').notEmpty().withMessage('  Fill in the email field blank').isEmail().withMessage('The form is incorrect '),
-        check('password').notEmpty().withMessage(' Fill in the password field blank'),     
-        check('email').custom(  (value,{req})  => {    
-            return   UserModel.findOne({email:value}).then(user => {
-                if(!user){
-                    return Promise.reject()
-                }
-                else{
-                    let flag = (bcrypt.compareSync(req.body.password, user.password ))
-                    if(!flag){
-                      return Promise.reject()
-                    }
-                    else{
-                        req.session.userId = user._id
-                    }        
-                }
-            })
-        }).withMessage('Something is incorrect')
-   ],
-    async (req,res)=>{
-      
-    const errors = validationResult(req)
-    let error = {}
-        if (!errors.isEmpty()){
-        
-           errors.errors.forEach((i)=>{
-            if(error[i.param]==undefined){
-                error[i.param] = i.msg
-              }
-           })
-           
-          res.send([error])
-        }
-        else{
-           
-        res.send(['ok',req.session.userId])
-
-        }
-
-})
-app.post('/findUser',  (req,res)=>{
-   if(req.body.id1 != ''){
-    let user = {}
-
-    UserModel.
-    findOne({ _id: req.body.id1 }).
-    populate('product'). // only works if we pushed refs to children
-    exec(function (err, person) {
-      if (err) return err;
-      console.log(person);
-      
-        user.name = person.name
-        user.surname = person.surname
-        user.age = person.age
-        user.email = person.email
-        user.product = person.product
-        res.send (user)
-    
-    });   
-   }
-   else {
-       res.send('error')
-   }
-})
-app.post('/editdata',[
-    check('name').notEmpty().withMessage('fill in the name field blank').isAlpha().withMessage('The name field should only contain a letter'),
-    check('surname').notEmpty().withMessage('fill in the surname field blank').isAlpha().withMessage('The surname field should only contain a letter'),
-    check('email').notEmpty().withMessage(' fill in the email field blank').isEmail().withMessage('The form is incorrect '),
-    check('age').notEmpty().withMessage('fill in the age field blank').isNumeric().withMessage(' The age field should only contain a number'),   
-    check('email').custom( value   => {
-       
-        return   UserModel.findOne({email:value}).then(user => {
-            if(user){
-                return Promise.reject()
-            }    
-        })       
-      }).withMessage('Emaily allredy exist')
-
-
-   
-],(req,res)=> {
-    const errors = validationResult(req)
-    let error = {}
-        if (!errors.isEmpty()){
-        
-           errors.errors.forEach((i)=>{
-            if(error[i.param]==undefined){
-                error[i.param] = i.msg
-              }
-           })
-           res.send([error])       
-        }
-        else{
-   
-            UserModel.updateOne({_id:req.body.id},{$set:{name:req.body.name,surname:req.body.surname,age:req.body.age,emaol:req.body.email}}).then(result =>{
-                console.log(result)
-            })
-            res.send(['ok'])
-        }
-       
-
-})
-app.post('/addProduct',[
-    check('name').notEmpty().withMessage('fill in the name field blank'),
-    check('price').notEmpty().withMessage('fill in the price field blank').isNumeric().withMessage('The price field should only contain a number'),
-    check('count').notEmpty().withMessage('fill in the count field blank').isNumeric().withMessage(' The age field should only contain a number'),   
-],(req,res)=>{
-    console.log('ekats tvyal',req.body)
-    let img = req.body.file
-    let product = new ProductModel ({
-        name:req.body.name,
-        count:req.body.count,
-        price:req.body.price,
-        description:req.body.description,
-        user:req.body.id,
-        image:img
-
-    })
-    const errors = validationResult(req)
-    let error = {}
-        if (!errors.isEmpty()){
-        
-           errors.errors.forEach((i)=>{ 
-            if(error[i.param]==undefined){
-                error[i.param] = i.msg
-              }
-           })
-           res.send(error)       
-        }
-        else{
-            UserModel.updateOne({_id:req.body.id},{ $push: { 'product':product} }).then(result=> {
-                console.log(result)
-            })
-            product.save()         
-            res.send('ok')
-        }
-       
-   
-})
-app.post('/products',(req,res)=>{
-    ProductModel.find().then(result =>{
-        res.send(result)
-    })
-})
-app.post('/showMyProducts',(req,res)=>{
-
-    ProductModel.find({ user: req.body.id }).then(result => {
-        res.send(result)
-    })
-})
-app.post('/addCart',(req,res)=>{
-
-    console.log('addCart',req.body)
-
-    res.send('added')
-    let cart = new CartModel ({
-        productId:req.body._id,
-        name:req.body.name,
-        count:req.body.count,
-        price:req.body.price,
-        description:req.body.description,
-        user:req.body.user,
-        myCount:1,
-        image:req.body.image
-    })
-    CartModel.findOne({productId:req.body._id}).then(result =>{
-        console.log(result)
-        if(result == null){
-            cart.save()
-        }
-        else{
-            if(result.myCount<result.count){
-                CartModel.updateOne({productId:req.body._id},{$inc:{myCount:1}}).then(result2 => {
-                    console.log('poxvac',result2)
-                })
-            }
-           
-        }
-    })
-})
-app.post('/showcart',(req,res)=> {
-    CartModel.find().then(result =>{
-        res.send(result)
-    })
-})
-app.post('/upload',upload.single('file'),(req,res)=>{
-    console.log('pti ga prinipi senc',req.body.Time)
-    console.log('file',req.file)
-    ProductModel.updateOne({image:req.body.Time},{$set:{image:req.file.filename}}).then(result => [
-        console.log('jamy poxeci',result)
-    ])
-    res.send('file')
-})
-app.post('/deleteFromCart',(req,res)=>{
-    console.log(req.body.id)
-    CartModel.deleteOne({_id:req.body.id}).then(result=>{
-        console.log('deleted',result)
-    })
-    CartModel.find().then(result =>{
-        res.send(result)
-    })
-})
-app.post('/deleteFromMyProduct',(req,res)=>{
-    console.log(req.body.id)
-    ProductModel.deleteOne({_id:req.body.id}).then(result=>{
-        console.log('deleted',result)
-    })
-    let name = `public/image/${req.body.image}`
-    console.log('jnjvox nkar',name)
-    fs.unlink(`${name}`, function (err) {
-        if (err) throw err;
-        // if no error, file has been deleted successfully
-        console.log('File deleted!');
-    }); 
-    ProductModel.find({user:req.body.userId}).then(result =>{
-        res.send(result)
-    })
-})
 
 const postStripeCharge = res => (stripeErr, stripeRes) => {
     if (stripeErr) {
@@ -349,4 +83,6 @@ app.post('/stripe',(req, res)=>{
     stripe.charges.create(req.body, postStripeCharge(res));
 
 })
+app.use(router)
+
 app.listen(8000)

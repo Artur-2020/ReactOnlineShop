@@ -16,6 +16,7 @@ class ProfileComponent extends React.Component{
       }
       else{
         this.props.history.push({pathname:"/login"})
+
       }
 
     

@@ -2,20 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import AllActions from '../../store/action'
 import Footer from '../footer/footerComponent'
-import Header from '../header/headerComponent'
+import Header from '../header/headerContainer'
+
 import ProfileCompoonent from './profileComponent'
 
 class ProfileContainer extends React.Component{
 
   constructor(props){
     super(props)
-    console.log(AllActions.profileActions)
-
+    console.log(this.props)
   }  
     render(){
       return(
         <React.Fragment>
-            <Header/>
+            {/* <Header/> */}
             <ProfileCompoonent loginState = {this.props.login} EditDataForm = {this.props.EditDataForm} changeValues = {this.props.changeValues  } userInfo = {this.props.profileValues} logOut = {this.props.logOut} history = {this.props.history} location = {this.props.location} profileState = {this.props.profile} />
             <Footer/>
         </React.Fragment>

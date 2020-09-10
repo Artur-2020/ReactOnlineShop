@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import ProductComponent from './productComponent.js'
 import AllActions from '../../store/action'
-import Header from '../header/headerComponent'
 import Footer from '../footer/footerComponent'
 
 class ProductContainer extends React.Component{
@@ -10,7 +9,6 @@ class ProductContainer extends React.Component{
     render(){
       return(
         <React.Fragment>
-          <Header/>
           <ProductComponent addCart = {this.props.addCart} productState ={this.props.product} showProducts={this.props.showProducts} />
           <Footer/>
         </React.Fragment>

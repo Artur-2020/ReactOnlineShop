@@ -27,7 +27,7 @@
     margin: auto;
     width: 150px;
     height: auto;
-    /* border: 1px solid; */
+    font-size: 12px;
 }
 .saveBtn{
     color: white;
@@ -38,6 +38,7 @@
 }
 .infoEditMain{
     margin-top: 150px;
+    height: auto;
     display: flex;
 }
 .editMain{
@@ -47,6 +48,7 @@
     border:1px solid #464E56;
     margin-top: 50px;
     margin-left: 150px;
+    margin-bottom: 10px;
 }
 .inp{
     display: block; 
