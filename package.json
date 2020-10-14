@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "dotenv": "^8.2.0",
     "express-validator": "^6.6.0",
     "mongoose": "^5.9.20",
     "mongoose-validator": "^0.2.2",

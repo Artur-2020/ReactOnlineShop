@@ -25,8 +25,8 @@ const router = require('./router')
 
  
 const STRIPE_SECRET_KEY = process.env.NODE_ENV === 'production'
-    ? 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C'
-    : 'sk_test_51H4LovFDR7tSfidLeLIFaLiPx3fWkngJDNocb5o4qBNVvtBIofRfbSsbFovKAs9YMOM9NAjElpq8JWKh0DB3tqpT00L8mRhm1C';
+    ? process.env.strpe_key
+    : process.env.strpe_key;
  
 const stripe = configureStripe(STRIPE_SECRET_KEY);
 //set storage
